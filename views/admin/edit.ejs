@@ -1,0 +1,61 @@
+<%- include('../partials/header', { title: 'Editar Notícia', user: user }) %>
+
+<!-- Hero Section -->          
+<section class="hero mb-4 text-center     text-    white d-flex align-items-cent    er justif    y-content-center">                                 
+    <div class="container">         
+        <h1 class="display-4">Editar Notícia</h1>            
+    </div>                      
+</section>
+
+<form action="/admin/edit/<%= news._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="currentImage" value="<%= news.image %>">
+    
+    <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="fas fa-heading"></i></span>
+        <label for="title" class="form-label visually-hidden">Título</label>
+        <input type="text" class="form-control" id="title" name="title" value="<%= news.title %>" required>
+    </div>
+    
+    <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="fas fa-list-alt"></i></span>
+        <label for="category" class="form-label visually-hidden">Categoria</label>
+        <select id="category" name="category" class="form-control" required>
+            <option value="">Selecione uma categoria</option>
+            <option value="Esportes" <%= news.category === 'Esportes' ? 'selected' : '' %>>Esportes</option>
+            <option value="Política" <%= news.category === 'Política' ? 'selected' : '' %>>Política</option>
+            <option value="Entretenimento" <%= news.category === 'Entretenimento' ? 'selected' : '' %>>Entretenimento</option>
+            <option value="Tecnologia" <%= news.category === 'Tecnologia' ? 'selected' : '' %>>Tecnologia</option>
+            <option value="Saúde" <%= news.category === 'Saúde' ? 'selected' : '' %>>Saúde</option>
+        </select>
+    </div>
+    
+    <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="fas fa-user"></i></span>
+        <label for="author" class="form-label visually-hidden">Autor</label>
+        <input type="text" class="form-control" id="author" name="author" value="<%= news.author %>" required>
+    </div>
+    
+    <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="fas fa-image"></i></span>
+        <label for="image" class="form-label visually-hidden">Imagem</label>
+        <% if (news.image) { %>
+            <img src="<%= news.image %>" alt="Imagem da Notícia" class="img-thumbnail mb-2" style="max-width: 50px;">
+        <% } else { %>
+            <img src="/images/default-news.jpg" alt="Imagem Padrão" class="img-thumbnail mb-2" style="max-width: 50px;">
+        <% } %>
+        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+    </div>
+    
+    <div class="mb-3">
+        <label for="content" class="form-label">Conteúdo</label>
+        <textarea class="form-control" id="content" name="content" rows="10" required><%= news.content %></textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-primary w-100">
+        <i class="fas fa-edit me-2"></i>Atualizar Notícia
+    </button>
+</form>
+
+<%- include('../partials/footer') %>
+
+

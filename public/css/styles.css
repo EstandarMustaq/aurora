@@ -1,0 +1,562 @@
+/* === 1. Reset Básico === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === 2. Variáveis CSS para Consistência de Cores e Fontes === */
+:root {
+    /* Cores Neutras */
+    --color-dark-gray: #2c2c2c;
+    --color-light-gray: #f0f0f0;
+    --color-white: #ffffff;
+    
+    /* Cores Verdes */
+    --color-dark-green: #2e8b57;
+    --color-light-green: #32cd32;
+    
+    /* Tipografia */
+    --font-family: 'Ubuntu', sans-serif;
+    --heading-font: 'Roboto', sans-serif;
+    --body-font-size: 16px;
+    --heading-font-weight: 700;
+    
+    /* Outros */
+    --transition-speed: 0.3s;
+}
+
+/* === 3. Estilização do Corpo e Tipografia === */
+body {
+    font-family: var(--font-family);
+    font-size: var(--body-font-size);
+    color: var(--color-dark-gray);
+    background-color: var(--color-light-gray);
+    line-height: 1.6;
+    transition: background-color var(--transition-speed), color var(--transition-speed) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font) !important;
+    font-weight: var(--heading-font-weight) !important;
+    color: var(--color-dark-gray) !important;
+    margin-bottom: 1rem !important;
+}
+
+p {
+    margin-bottom: 1rem !important;
+}
+
+/* === 4. Barra de Navegação === */
+.navbar {
+    background-color: var(--color-white) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-family: var(--heading-font);
+    font-size: 1.75rem;
+    color: var(--color-dark-green) !important;
+    transition: color var(--transition-speed);
+}
+
+.navbar-brand:hover {
+    color: var(--color-light-green) !important;
+}
+
+.navbar-nav .nav-link {
+    color: var(--color-dark-gray) !important;
+    position: relative;
+    transition: color var(--transition-speed), transform var(--transition-speed) !important;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    display: block;
+    width: 0%;
+    height: 2px;
+    background-color: var(--color-dark-green) !important;
+    transition: width var(--transition-speed) !important;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    width: 100%;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--color-dark-green) !important;
+    transform: translateY(-2px);
+}
+
+.navbar-toggler {
+    box-shadow: none !important;
+    border: none;
+}
+
+/* === 5. Botões === */
+.btn {
+    border-radius: 50px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed) !important;
+}
+
+.btn-primary {
+    background-color: var(--color-dark-green) !important;
+    border-color: var(--color-dark-green) !important;
+    color: var(--color-white) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-light-green) !important;
+    border-color: var(--color-light-green) !important;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(50, 205, 50, 0.3) !important;
+}
+
+.btn-secondary {
+    background-color: var(--color-dark-gray) !important;
+    border-color: var(--color-dark-gray) !important;
+    color: var(--color-white) !important;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-dark-green) !important;
+    border-color: var(--color-dark-green) !important;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(46, 139, 87, 0.3) !important;
+}
+
+.btn-success {
+    background-color: var(--color-light-green) !important;
+    border-color: var(--color-light-green) !important;
+    color: var(--color-white) !important;
+}
+
+.btn-success:hover {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    box-shadow: 0 8px 16px rgba(40, 167, 69, 0.3) !important;
+}
+
+.btn-danger {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: var(--color-white);
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a !important;
+    border-color: #a71d2a !important;
+    box-shadow: 0 8px 16px rgba(167, 29, 42, 0.3);
+}
+
+.btn-warning {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: var(--color-dark-gray);
+}
+
+.btn-warning:hover {
+    background-color: #e0a800 !important;
+    border-color: #e0a800 !important;
+    box-shadow: 0 8px 16px rgba(224, 168, 0, 0.3);
+}
+
+/* === 6. Formulários === */
+.form-control {
+    background-color: var(--color-white) !important;
+    border: 1px solid var(--color-dark-gray) !important;
+    border-radius: 10px;
+    color: var(--color-dark-gray) !important;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed) !important;
+}
+
+.form-control:focus {
+    border-color: var(--color-dark-green) !important;
+    box-shadow: 0 0 0 0.2rem rgba(46, 139, 87, 0.25) !important;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--color-dark-gray) !important;
+}
+
+/* === 7. Cartões === */
+.card {
+    background-color: var(--color-white) !important;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed) !important;
+}
+
+.card-header {
+    background-color: var(--color-dark-green) !important;
+    color: var(--color-white) !important;
+    font-weight: 700;
+}
+
+.card-body {
+    color: var(--color-dark-gray) !important;
+}
+
+.card-footer {
+    background-color: var(--color-white);
+    color: var(--color-dark-gray);
+    border-top: 1px solid var(--color-dark-gray);
+}
+
+/* === 8. Tabelas === */
+.table {
+    background-color: var(--color-white);
+    color: var(--color-dark-gray);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: var(--color-dark-gray);
+    color: var(--color-white);
+    border-bottom: 2px solid var(--color-dark-gray);
+}
+
+.table tbody tr {
+    border-bottom: 1px solid var(--color-dark-gray);
+    transition: background-color var(--transition-speed);
+}
+
+.table tbody tr:hover {
+    background-color: rgba(46, 139, 87, 0.05);
+}
+
+.table th, .table td {
+    padding: 0.75rem 1rem;
+}
+
+.table .btn {
+    margin-right: 0.5rem;
+}
+
+/* === 9. Alertas === */
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    position: relative;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* === 10. Comentários === */
+.comment {
+    background-color: var(--color-white);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.comment:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.comment strong {
+    color: var(--color-dark-green);
+}
+
+.comment p {
+    margin-top: 0.5rem;
+    color: var(--color-dark-gray);
+}
+
+/* === 11. Gráficos === */
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* === 12. Imagens === */
+img.img-fluid {
+    border-radius: 5px;
+    object-fit: cover;
+    max-height: 256px;
+    width: 100vh;
+    transition: transform var(--transition-speed) !important;
+}
+
+/* === 13. Botões de Ação no Admin === */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 50px;
+}
+
+/* === 14. Estilização de Links === */
+a {
+    color: var(--color-dark-green);
+    text-decoration: none;
+    transition: color var(--transition-speed) !important;
+}
+
+a:hover {
+    color: var(--color-light-green);
+}
+
+/* === 15. Responsividade === */
+@media (max-width: 1024px) {
+    .main-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        margin-top: 10px;
+    }
+
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .table th, .table td {
+        padding: 0.5rem 0.75rem;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1.2rem;
+    }
+
+    .comment {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .card-header, .card-footer {
+        font-size: 0.9rem;
+    }
+}
+
+/* === 16. Animações e Microinterações === */
+.card {
+    perspective: 1000px;
+}
+
+.card:hover .card-body {
+    transition: transform var(--transition-speed);
+}
+
+/* === Hero Section === */
+.hero {
+    background: linear-gradient(135deg, var(--color-dark-gray) 0%, var(--color-light-gray) 100%);
+    padding: 100px 20px;
+    color: var(--color-white) !important;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(46, 139, 87, 0.6); /* Sobreposição verde */
+    z-index: 1;
+}
+
+.hero > .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+/* === Estilo Base para o Grupo de Botões === */
+.btn-group-categories {
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 4px;
+    padding-bottom: 10px;
+}
+
+/* Esconde a barra de rolagem */
+.btn-group-categories::-webkit-scrollbar {
+    display: none;
+}
+
+.btn-group-categories {
+    -ms-overflow-style: none;  /* IE e Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+/* Estilo para os botões individuais */
+.btn-group-categories .btn {
+    flex: 0 0 auto; /* Evita que os botões se estiquem */
+    padding: 5px 5px;
+    font-size: 16px;
+    border-radius: 8px;
+    min-width: 100px;
+    white-space: nowrap; /* Evita que o texto quebre em múltiplas linhas */
+}
+
+/* Estilo para o estado ativo */
+.btn-group-categories .btn.active {
+    background-color: #2e8b57;
+    color: #ffffff;
+    border-color: #2e8b57;
+}
+
+/* Ajustes para telas maiores (desktop) */
+@media (min-width: 769px) {
+    .btn-group-categories {
+        justify-content: center;
+        overflow-x: visible;
+    }
+
+    .btn-group-categories .btn {
+        min-width: 108px;
+    }
+}
+
+/* Estilos Adicionais para Melhor Aparência */
+.btn-group-categories .btn:hover {
+    background-color: #32cd32;
+    color: #ffffff;
+    border-color: #32cd32;
+    transition: transform 0.2s ease-in-out, background-color 0.2s, border-color 0.2s;
+}
+
+/* Rolagem Suave para Links Internos */
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* ===  Login Container e Card === */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background-color: var(--color-white);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-card .card-header {
+    background-color: var(--color-dark-green);
+    color: var(--color-white);
+    border-bottom: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.login-card .card-header h2 {
+    font-family: var(--heading-font);
+    font-weight: var(--heading-font-weight);
+    margin-bottom: 0;
+}
+
+.login-card .card-body {
+    padding: 20px;
+}
+
+/* === Responsividade === */
+@media (max-width: 576px) {
+    .login-card {
+        padding: 20px;
+    }
+
+    .login-card .card-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .login-card .btn-primary {
+        padding: 10px;
+        font-size: 1rem;
+    }
+}
+

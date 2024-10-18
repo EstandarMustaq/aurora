@@ -1,0 +1,41 @@
+<%- include('../partials/header', { title: 'Login', user: null }) %>
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="card-header text-center">
+            <h2><i class="fas fa-lock me-2"></i>Login Administrativo</h2>
+        </div>
+        <div class="card-body">
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="alert alert-danger d-flex align-items-center" style="font-size: 0.6rem; padding: 0.75rem 0.75rem;">                   <i class="fas fa-exclamation-circle me-2"></i> <span><%= error %></span>
+                </div>
+            <% } %>
+            <form action="/admin/login" method="POST">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Usuário</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="username-addon">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu usuário" aria-describedby="username-addon" required>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Senha</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="password-addon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" aria-describedby="password-addon" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-sign-in-alt me-2"></i>Entrar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
+

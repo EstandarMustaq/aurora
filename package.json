@@ -1,0 +1,30 @@
+{
+  "name": "portalnews",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "create-admin": "node createAdmin.js"
+  },
+  "keywords": [],
+  "author": "Estandar Mustaq <estandarmustaque@hotmail.com>",
+  "license": "ISC",
+  "description": "Um site de notícias com painel administrativo interativo",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "chart.js": "^4.4.4",
+    "cookie-parser": "^1.4.7",
+    "datatables.net": "^2.1.8",
+    "datatables.net-bs5": "^2.1.8",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.1",
+    "express-validator": "^7.0.1",
+    "method-override": "^3.0.0",
+    "multer": "^1.4.5-lts.1"
+  }
+}

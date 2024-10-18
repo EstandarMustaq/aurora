@@ -1,0 +1,63 @@
+<%- include('../partials/header', { title: 'Adicionar Notícia', user: user }) %>
+
+<!-- Hero Section -->               
+<section class="hero mb-4 text-center     text-    white d-flex align-items-cent    er justif    y-content-center">                                 
+    <div class="container">         
+        <h1 class="display-4">Adicionar Nova Notícia</h1>            
+    </div>                          
+</section>
+
+<% if (errors.length > 0) { %>
+    <div class="alert alert-danger">
+        <ul>
+            <% errors.forEach(error => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
+
+<form action="/admin/news" method="POST" enctype="multipart/form-data">
+    <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="fas fa-heading"></i></span>
+        <label for="title" class="form-label visually-hidden">Título</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Título da notícia" required>
+    </div>
+    
+    <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="fas fa-list-alt"></i></span>
+        <label for="category" class="form-label visually-hidden">Categoria</label>
+        <select id="category" name="category" class="form-control" required>
+            <option value="">Selecione uma categoria</option>
+            <option value="Esportes">Esportes</option>
+            <option value="Política">Política</option>
+            <option value="Entretenimento">Entretenimento</option>
+            <option value="Tecnologia">Tecnologia</option>
+            <option value="Saúde">Saúde</option>
+        </select>
+    </div>
+    
+    <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="fas fa-user"></i></span>
+        <label for="author" class="form-label visually-hidden">Autor</label>
+        <input type="text" class="form-control" id="author" name="author" placeholder="Nome do autor" required>
+    </div>
+    
+    <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="fas fa-image"></i></span>
+        <label for="image" class="form-label visually-hidden">Imagem</label>
+        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+    </div>
+    
+    <div class="mb-3">
+        <label for="content" class="form-label">Conteúdo</label>
+        <textarea class="form-control" id="content" name="content" rows="10" placeholder="Digite o conteúdo da notícia" required></textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-success w-100">
+        <i class="fas fa-paper-plane me-2"></i>Criar Notícia
+    </button>
+</form>
+
+<%- include('../partials/footer') %>
+

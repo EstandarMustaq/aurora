@@ -1,0 +1,52 @@
+<%- include('../partials/header', { title: 'Home', user: null}) %>
+
+<!-- Hero Section -->
+<section class="hero text-center text-white d-flex align-items-center justify-content-center">
+    <div class="container">
+        <h1 class="display-4">Bem-vindo ao portalnews</h1>
+        <p class="lead">Fique por dentro das últimas notícias do país e do mundo.</p>
+        <a href="#latest-news" class="btn btn-primary mt-3"><i class="fas fa-newspaper me-2"></i>Confira as Notícias</a>
+    </div>
+</section>
+
+<!-- Notícias Recentes -->
+<section id="latest-news" class="mt-5">
+    <h1 class="mb-4">Últimas Notícias</h1>
+    
+    <!-- Filtros por Categoria -->
+    <div class="mb-4">
+        <div class="btn-group btn-group-categories" role="group" aria-label="Categorias">
+            <a href="/" class="btn btn-outline-secondary <%= selectedCategory === 'All' ? 'active' : '' %>">Todas</a>
+            <a href="/?category=Esportes" class="btn btn-outline-secondary <%= selectedCategory === 'Esportes' ? 'active' : '' %>">Esportes</a>
+            <a href="/?category=Política" class="btn btn-outline-secondary <%= selectedCategory === 'Política' ? 'active' : '' %>">Política</a>
+            <a href="/?category=Entretenimento" class="btn btn-outline-secondary <%= selectedCategory === 'Entretenimento' ? 'active' : '' %>">Entretenimento</a>
+            <a href="/?category=Tecnologia" class="btn btn-outline-secondary <%= selectedCategory === 'Tecnologia' ? 'active' : '' %>">Tecnologia</a>
+            <a href="/?category=Saúde" class="btn btn-outline-secondary <%= selectedCategory === 'Saúde' ? 'active' : '' %>">Saúde</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <% news.forEach(item => { %>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <% if (item.image) { %>
+                        <img src="<%= item.image %>" class="card-img-top img-fluid" alt="Imagem da Notícia">
+                    <% } else { %>
+                        <img src="/images/default-news.jpg" class="card-img-top img-fluid" alt="Imagem Padrão">
+                    <% } %>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= item.title %></h5>
+                        <p class="card-text"><%= item.content.substring(0, 100) %>...</p>
+                        <a href="/news/<%= item._id %>" class="btn btn-primary"><i class="fas fa-eye me-2"></i>Leia Mais</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Por <%= item.author %> em <%= new Date(item.createdAt).toLocaleDateString() %>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>
+

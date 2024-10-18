@@ -1,0 +1,49 @@
+<%- include('../partials/header', { title: news.title, user: null}) %>
+
+<article class="mb-5">
+    <h1 class="mb-3"><%= news.title %></h1>
+    <p class="text-muted mb-3">
+        <i class="fas fa-user me-2"></i>Por <%= news.author %>
+        | <i class="fas fa-calendar-alt"></i> <%= new Date(news.createdAt).toLocaleDateString() %>
+        | <i class="fas fa-tag"></i> <%= news.category %>
+    </p>
+    <% if (news.image) { %>
+        <img src="<%= news.image %>" alt="Imagem da Notícia" class="img-fluid mb-4">
+    <% } else { %>
+        <img src="/images/default-news.jpg" alt="Imagem Padrão" class="img-fluid mb-4">
+    <% } %>
+    <div>
+        <%= news.content %>
+    </div>
+</article>
+
+<hr>
+
+<h3 class="mb-3">Comentários:</h3>
+<% if (comments.length === 0) { %>
+    <p style="font-size: 0.8rem;">Nenhum comentário ainda. Seja o primeiro a comentar!</p>
+<% } else { %>
+    <% comments.forEach(comment => { %>
+        <div class="comment">
+            <strong><%= comment.username %></strong>
+            <p><%= comment.comment %></p>
+            <p class="text-muted"><%= new Date(comment.createdAt).toLocaleDateString() %></p>
+        </div>
+    <% }) %>
+<% } %>
+
+<h4 class="mt-4">Adicionar Comentário:</h4>
+<form action="/news/<%= news._id %>/comment" method="POST">
+    <div class="mb-3">
+        <label for="username" class="form-label">Seu Nome</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu nome" required>
+    </div>
+    <div class="mb-3">
+        <label for="comment" class="form-label">Seu Comentário</label>
+        <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Digite seu comentário" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-success w-100"><i class="fas fa-paper-plane me-2"></i>Enviar Comentário</button>
+</form>
+
+<%- include('../partials/footer') %>
+
