@@ -118,7 +118,6 @@ p {
 .btn-primary:hover {
     background-color: var(--color-light-green) !important;
     border-color: var(--color-light-green) !important;
-    transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(50, 205, 50, 0.3) !important;
 }
 
@@ -131,7 +130,6 @@ p {
 .btn-secondary:hover {
     background-color: var(--color-dark-green) !important;
     border-color: var(--color-dark-green) !important;
-    transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(46, 139, 87, 0.3) !important;
 }
 
@@ -302,7 +300,7 @@ p {
 /* === 11. Gráficos === */
 canvas {
     max-width: 100%;
-    height: auto;
+    height: 480px !important;
 }
 
 /* === 12. Imagens === */
@@ -483,7 +481,7 @@ a:hover {
     }
 
     .btn-group-categories .btn {
-        min-width: 108px;
+        min-width: 180px;
     }
 }
 
