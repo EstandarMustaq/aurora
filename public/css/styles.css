@@ -181,8 +181,8 @@ p {
 }
 
 .form-control:focus {
-    border-color: var(--color-dark-green) !important;
-    box-shadow: 0 0 0 0.2rem rgba(46, 139, 87, 0.25) !important;
+    border-color: none;
+    box-shadow: none;
 }
 
 .form-label {
@@ -282,17 +282,12 @@ p {
 
 /* === 10. Comentários === */
 .comment {
-    background-color: var(--color-white);
+    background-color: #f9f9f9 !important;
     border-radius: 10px;
     padding: 1rem;
     margin-bottom: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-}
-
-.comment:hover {
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .comment strong {
@@ -560,3 +555,12 @@ html {
     }
 }
 
+.footer {
+    color: var(--color-dark-gray) !important;
+    background-color: var(--color-white) !important;
+}
+
+.footer-link a:hover {
+    color: var(--color-dark-green) !important;
+    transition: color var(--transition-speed);
+}

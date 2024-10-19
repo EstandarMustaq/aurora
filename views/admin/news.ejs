@@ -1,9 +1,10 @@
-<%- include('../partials/header', { title: 'Adicionar Notícia', user: user }) %>
+<%- include('../partials/header', { title: 'Adicionar Notícia', user: user, hideNavbar: false }) %>
 
 <!-- Hero Section -->               
 <section class="hero mb-4 text-center     text-    white d-flex align-items-cent    er justif    y-content-center">                                 
     <div class="container">         
-        <h1 class="display-4">Adicionar Nova Notícia</h1>            
+        <h1 class="display-4">Adicionar Nova Notícia</h1>       
+        <p class="lead">A forma facil de criar a sua notícia.</p>
     </div>                          
 </section>
 
@@ -54,7 +55,7 @@
         <textarea class="form-control" id="content" name="content" rows="10" placeholder="Digite o conteúdo da notícia" required></textarea>
     </div>
     
-    <button type="submit" class="btn btn-success w-100">
+    <button type="submit" class="btn btn-primary w-100">
         <i class="fas fa-paper-plane me-2"></i>Criar Notícia
     </button>
 </form>
