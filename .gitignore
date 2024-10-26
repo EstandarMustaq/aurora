@@ -1,4 +1,14 @@
+# Vercel
 .vercel
+
+# Ambiente local
 .env
-node_modules
+
+# Nodejs
+node_modules/
 package-lock.json
+
+# Logs
+logs
+*.log
+npm-debug.log*
