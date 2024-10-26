@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const path = require('path');
 
+const app = express();
+
 // Conectar ao banco de dados MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -14,25 +16,21 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('MongoDB conectado'))
 .catch(err => console.log(err));
 
-const app = express();
-
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(methodOverride('_method')); // Para suportar PUT e DELETE via forms
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.set('view engine', 'ejs');
 
 // Rotas
-const newsRoutes = require('./routes/index');
-const adminRoutes = require('./routes/admin');
-const apiRoutes = require('./routes/api');
+const newsRoutes = require('../routes/index');
+const adminRoutes = require('../routes/admin');
+const apiRoutes = require('../routes/api');
 
 app.use('/', newsRoutes);
 app.use('/admin', adminRoutes);
 app.use('/api', apiRoutes);
 
-// Iniciar o servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+module.exports = app;
