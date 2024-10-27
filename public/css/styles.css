@@ -299,7 +299,7 @@ p {
 
 /* === 11. Gráficos === */
 canvas {
-    max-width: 100%;
+    max-width: 50%;
     height: 480px !important;
 }
 
@@ -481,7 +481,7 @@ a:hover {
     }
 
     .btn-group-categories .btn {
-        min-width: 180px;
+        min-width: 184px;
     }
 }
 
