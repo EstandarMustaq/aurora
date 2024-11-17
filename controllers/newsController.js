@@ -1,13 +1,22 @@
+// newsController.js
 const News = require('../models/News');
 const Comment = require('../models/Comment');
 
-// Exibir todas as notícias com filtro por categoria
 exports.getAllNews = async (req, res) => {
     try {
         const { category } = req.query;
         const filter = category ? { category } : {};
         const news = await News.find(filter).sort({ createdAt: -1 });
-        res.render('news/index', { news, selectedCategory: category || 'All' });
+        const entertainmentNews = await News.find({ category: 'Entretenimento' }).limit(2);
+        const politicsNews = await News.find({ category: 'Política' }).limit(2);
+
+        // Renderizar a view com todas as variáveis necessárias
+        res.render('news/index', { 
+            news,
+            entertainmentNews,
+            politicsNews,
+            selectedCategory: category || 'All' 
+        });
     } catch (err) {
         console.error(err);
         res.status(500).send('Erro ao obter notícias');
@@ -41,5 +50,4 @@ exports.addComment = async (req, res) => {
         res.status(500).send('Erro ao adicionar comentário');
     }
 };
-
 

@@ -1,17 +1,56 @@
 <%- include('../partials/header', { title: 'Home', user: null, hideNavbar: false}) %>
 
-<!-- Hero Section -->
-<section class="hero text-center text-white d-flex align-items-center justify-content-center">
-    <div class="container">
-        <h1 class="display-4">Bem-vindo ao portalnews</h1>
-        <p class="lead">Fique por dentro das últimas notícias do país e do mundo.</p>
-        <a href="#latest-news" class="btn btn-primary mt-3"><i class="fas fa-newspaper me-2"></i>Confira as Notícias</a>
+<!-- Hero com Carousel -->
+<section class="hero-carousel text-center text-white d-flex align-items-center justify-content-center">
+    <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel"> 
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="container">
+                    <h1 class="display-4 text-white">Design reimaginado - PortalNews</h1>
+                    <p class="lead">Fique por dentro das últimas notícias do país e do mundo.</p>
+                    <a href="#latest-news" class="btn btn-primary mt-3" id="scrollToLatestNews"><i class="fas fa-newspaper me-2"></i>Confira as Notícias</a>
+                </div>
+            </div>
+            <% entertainmentNews.forEach((news, index) => { %>
+                <div class="carousel-item">
+                    <div class="container">
+                        <h2 class="text-white"><%= news.title %></h2>
+                        <p><%= news.content.substring(0, 70) %>...</p>
+                        <a href="/news/<%= news._id %>" class="btn btn-light"><i class="fas fa-eye me-2"></i>Leia Mais</a>
+                    </div>
+                </div>
+            <% }); %>
+            <% politicsNews.forEach((news, index) => { %>
+                <div class="carousel-item">
+                    <div class="container">
+                        <h2 class="text-white"><%= news.title %></h2>
+                        <p><%= news.content.substring(0, 70) %>...</p>
+                        <a href="/news/<%= news._id %>" class="btn btn-light"><i class="fas fa-eye me-2"></i>Leia Mais</a>
+                    </div>
+                </div>
+            <% }); %>
+        </div>           
     </div>
+    <!-- Indicadores de carousel -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </section>
 
 <!-- Notícias Recentes -->
 <section id="latest-news" class="mt-5">
-    <h1 class="mb-4">Últimas Notícias</h1>
+    <h1 class="mb-4 text-center">Últimas Notícias</h1>
     
     <!-- Filtros por Categoria -->
     <div class="mb-4">
@@ -37,9 +76,9 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= item.title %></h5>
                         <p class="card-text"><%= item.content.substring(0, 100) %>...</p>
-                        <a href="/news/<%= item._id %>" class="btn btn-primary"><i class="fas fa-eye me-2"></i>Leia Mais</a>
+                        <a href="/news/<%= item._id %>" class="btn btn-primary float-end"><i class="fas fa-eye me-2"></i>Leia Mais</a>
                     </div>
-                    <div class="card-footer text-muted">
+                    <div class="card-footer text-muted" style="font-size: 0.9rem;">
                         Por <%= item.author %> em <%= new Date(item.createdAt).toLocaleDateString() %>
                     </div>
                 </div>
@@ -50,3 +89,40 @@
 
 <%- include('../partials/footer') %>
 
+<script type="text/javascript">
+ document.addEventListener('DOMContentLoaded', function () {
+     const carousel = document.getElementById('newsCarousel');
+     const indicators = document.querySelectorAll('.carousel-indicators button');
+
+     // Função para atualizar a classe "active" nos indicadores
+     function updateIndicators() {
+         const activeIndex = Array.from(carousel.querySelectorAll('.carousel-item')).indexOf(carousel.querySelector('.carousel-item.active'));
+
+         indicators.forEach((indicator, index) => {
+             if (index === activeIndex) {
+                 indicator.classList.add('active');
+             } else {
+                 indicator.classList.remove('active');
+             }
+         });
+     }
+
+     // Escuta o evento 'slid.bs.carousel'
+     carousel.addEventListener('slid.bs.carousel', updateIndicators);
+
+     updateIndicators();
+ });
+
+ document.addEventListener('DOMContentLoaded', function () {
+     const link = document.getElementById('scrollToLatestNews');
+     const targetSection = document.getElementById('latest-news');
+
+     link.addEventListener('click', function(event) {
+         event.preventDefault();
+
+         targetSection.scrollIntoView({
+             behavior: 'smooth'
+         });
+     });
+ });
+</script>
