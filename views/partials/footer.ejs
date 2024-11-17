@@ -1,44 +1,53 @@
 </div> <!-- Fim do container -->
 
-<footer class="footer mt-5 py-4">
-    <div class="container text-center">
-        <!-- Links Úteis Adicionais -->
-        <div class="mb-4 footer-link">
-            <a href="/about" class="text-dark me-3">Sobre Nós</a>
-            <a href="/contact" class="text-dark me-3">Contato</a>
-            <a href="/privacy-policy" class="text-dark me-3">Política de Privacidade</a>
-            <a href="/terms" class="text-dark me-3">Termos de Serviço</a>
-            <a href="/faq" class="text-dark me-3">FAQ</a>
+<footer class="footer mt-5 py-4 text-white">
+    <div class="container">
+        <div class="row">
+            <!-- Links Úteis -->
+            <div class="col-md-4 mb-4">
+                <h5 class="footer-title">Links Úteis</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/about" class="footer-link">Sobre Nós</a></li>
+                    <li><a href="/contact" class="footer-link">Contato</a></li>
+                    <li><a href="/privacy-policy" class="footer-link">Política de Privacidade</a></li>
+                    <li><a href="/terms" class="footer-link">Termos de Serviço</a></li>
+                    <li><a href="/faq" class="footer-link">FAQ</a></li>
+                </ul>
+            </div>
+            <!-- Redes Sociais -->
+            <div class="col-md-4 mb-4 text-center">
+                <h5 class="footer-title">Siga-nos</h5>
+                <div class="footer-social">
+                    <a href="https://facebook.com" target="_blank" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="social-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Desenvolvedor -->
+            <div class="col-md-4 mb-4 text-center footer-social">
+                <h5 class="footer-title">Criador</h5>
+
+                <a href="https://github.com/EstandarMustaq/" target="_blank" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.facebook.com/juniorestandar.mustaque" target="_blank" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
         </div>
-        <!-- Ícones de Redes Sociais -->
-        <div class="mb-4 footer-link">
-            <a href="https://facebook.com" target="_blank" class="text-dark me-3">
-                <i class="fab fa-facebook-f fa-lg"></i>
-            </a>
-            <a href="https://twitter.com" target="_blank" class="text-dark me-3">
-                <i class="fab fa-twitter fa-lg"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" class="text-dark me-3">
-                <i class="fab fa-instagram fa-lg"></i>
-            </a>
-            <a href="https://linkedin.com" target="_blank" class="text-dark me-3">
-                <i class="fab fa-linkedin-in fa-lg"></i>
-            </a>
-            <a href="https://youtube.com" target="_blank" class="text-dark">
-                <i class="fab fa-youtube fa-lg"></i>
-            </a>
-        </div>
-        <!-- Seção do Criador -->
-        <div class="mb-3 footer-link">
-            <p style="font-size: 0.75rem;">Desenvolvido por <strong>Estandar Mustaq</strong></p>
-            <a href="https://techcommtc.slack.com/" target="_blank" class="text-dark me-3">
-                <i class="fab fa-slack fa-lg"></i>
-            </a>
-            <a href="https://github.com/EstandarMustaq/" target="_blank" class="text-dark">
-                <i class="fab fa-github fa-lg"></i>
-            </a>
-        </div>
-        <p class="mb-0">&copy; <%= new Date().getFullYear() %> portalnews, Todos os direitos reservados.</p>
+        <p class="text-center mt-3 mb-0">&copy; <%= new Date().getFullYear() %> PortalNews, Todos os direitos reservados.</p>
     </div>
 </footer>
 

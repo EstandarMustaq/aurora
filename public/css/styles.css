@@ -14,7 +14,7 @@
     
     /* Cores Verdes */
     --color-dark-green: #2e8b57;
-    --color-light-green: #32cd32;
+    --color-light-green: #32cd75;
     
     /* Tipografia */
     --font-family: 'Ubuntu', sans-serif;
@@ -121,7 +121,6 @@ p {
 .btn-primary:hover {
     background-color: var(--color-light-green) !important;
     border-color: var(--color-light-green) !important;
-    box-shadow: 0 8px 16px rgba(50, 205, 50, 0.3) !important;
 }
 
 .btn-secondary {
@@ -308,7 +307,8 @@ canvas {
 
 /* === 12. Imagens === */
 img.img-fluid {
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     object-fit: cover;
     max-height: 256px;
     width: 100vh;
@@ -318,7 +318,7 @@ img.img-fluid {
 /* === 13. Botões de Ação no Admin === */
 .btn-sm {
     padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
+    font-size: 0.675rem;
     border-radius: 50px;
 }
 
@@ -547,9 +547,9 @@ a:hover {
 }
 
 .btn-group-categories .btn:hover {
-    background-color: #32cd32;
+    background-color: var(--color-light-green);
     color: #ffffff;
-    border-color: #32cd32;
+    border-color: var(--color-light-green);
     transition: transform 0.2s ease-in-out, background-color 0.2s, border-color 0.2s;
 }
 
@@ -569,7 +569,7 @@ html {
 
 .login-card {
     background-color: var(--color-white);
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     padding: 30px;
     max-width: 400px;
@@ -578,11 +578,11 @@ html {
 
 .login-card .card-header {
     background-color: var(--color-dark-green);
-    color: var(--color-white) !important;
     border-bottom: none;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
     padding: 20px;
     text-align: center;
 }
@@ -591,6 +591,7 @@ html {
     font-family: var(--heading-font);
     font-weight: var(--heading-font-weight);
     margin-bottom: 0;
+    color: var(--color-white) !important;
 }
 
 .login-card .card-body {
@@ -613,12 +614,128 @@ html {
     }
 }
 
+/* == footer == */
 .footer {
-    color: var(--color-dark-gray) !important;
-    background-color: var(--color-white) !important;
+    background: var(--color-dark-gray);
+    color: var(--color-light-gray);
+    font-family: var(--font-family);
+    font-size: var(--body-font-size);
+    padding: 20px 0;
 }
 
-.footer-link a:hover {
-    color: var(--color-dark-green) !important;
-    transition: color var(--transition-speed);
+.footer-title {
+    font-family: var(--heading-font);
+    font-size: 1.5rem;
+    font-weight: var(--heading-font-weight);
+    color: var(--color-light-green) !important;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
 }
+
+.footer-link {
+    color: var(--color-light-gray);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: color var(--transition-speed) ease;
+}
+
+.footer-link:hover {
+    color: var(--color-light-green);
+}
+
+.footer-social .social-icon {
+    display: inline-block;
+    margin: 0 5px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background: var(--color-dark-green);
+    color: var(--color-white);
+    transition: background var(--transition-speed), transform var(--transition-speed);
+}
+
+.footer-social .social-icon:hover {
+    background: var(--color-light-green);
+    transform: scale(1.2);
+}
+
+.footer p {
+    font-size: 0.95rem;
+    color: var(--color-light-gray);
+}
+
+/* === Media Queries === */
+
+/* Pequenas telas (até 576px) */
+@media (max-width: 576px) {
+    .footer {
+        text-align: center;
+        padding: 15px 10px;
+    }
+
+    .footer-title {
+        font-size: 1.2rem;
+    }
+
+    .footer-link {
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .footer-social .social-icon {
+        margin: 5px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+    }
+
+    .footer p {
+        font-size: 0.85rem;
+    }
+}
+
+/* Telas médias (577px a 768px) */
+@media (min-width: 577px) and (max-width: 768px) {
+    .footer {
+        padding: 20px 15px;
+    }
+
+    .footer-title {
+        font-size: 1.4rem;
+    }
+
+    .footer-link {
+        margin-bottom: 0.6rem;
+    }
+
+    .footer-social .social-icon {
+        width: 38px;
+        height: 38px;
+        line-height: 38px;
+    }
+}
+
+/* Telas grandes (769px) */
+@media (min-width: 769px) {
+    .footer {
+        padding: 25px 20px;
+    }
+
+    .footer-title {
+        font-size: 1.6rem;
+    }
+
+    .footer-link {
+        margin-bottom: 0.5rem;
+    }
+
+    .footer-social .social-icon {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
