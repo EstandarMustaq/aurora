@@ -7,7 +7,8 @@
         </div>
         <div class="card-body">
             <% if (typeof error !== 'undefined' && error) { %>
-                <div class="alert alert-danger d-flex align-items-center" style="font-size: 0.6rem; padding: 0.75rem 0.75rem;">                   <i class="fas fa-exclamation-circle me-2"></i> <span><%= error %></span>
+                <div class="alert alert-danger d-flex align-items-center" style="font-size: 0.6rem; padding: 0.75rem 0.75rem;">
+                    <i class="fas fa-exclamation-circle me-2"></i><span><%= error %></span>
                 </div>
             <% } %>
             <form action="/admin/login" method="POST">
@@ -17,7 +18,7 @@
                         <span class="input-group-text" id="username-addon">
                             <i class="fas fa-user"></i>
                         </span>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu usuário" aria-describedby="username-addon" required>
+                        <input type="text" class="form-control bg-light" id="username" name="username" placeholder="Digite seu usuário" aria-describedby="username-addon" required>
                     </div>
                 </div>
                 <div class="mb-4">
@@ -26,7 +27,7 @@
                         <span class="input-group-text" id="password-addon">
                             <i class="fas fa-lock"></i>
                         </span>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" aria-describedby="password-addon" required>
+                        <input type="password" class="form-control bg-light" id="password" name="password" placeholder="Digite sua senha" aria-describedby="password-addon" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
