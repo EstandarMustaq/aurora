@@ -2,127 +2,267 @@
 
 <!-- Hero com Carousel -->
 <section class="hero-carousel text-center text-white d-flex align-items-center justify-content-center">
-    <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel"> 
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="container">
-                    <h1 class="display-4 text-white">Design reimaginado - PortalNews</h1>
-                    <p class="lead">Fique por dentro das últimas notícias do país e do mundo.</p>
-                    <a href="#latest-news" class="btn btn-primary mt-3" id="scrollToLatestNews"><i class="fas fa-newspaper me-2"></i>Confira as Notícias</a>
-                </div>
-            </div>
-            <% entertainmentNews.forEach((news, index) => { %>
-                <div class="carousel-item">
-                    <div class="container">
-                        <h2 class="text-white"><%= news.title %></h2>
-                        <p><%= news.content.substring(0, 70) %>...</p>
-                        <a href="/news/<%= news._id %>" class="btn btn-light"><i class="fas fa-eye me-2"></i>Leia Mais</a>
-                    </div>
-                </div>
-            <% }); %>
-            <% politicsNews.forEach((news, index) => { %>
-                <div class="carousel-item">
-                    <div class="container">
-                        <h2 class="text-white"><%= news.title %></h2>
-                        <p><%= news.content.substring(0, 70) %>...</p>
-                        <a href="/news/<%= news._id %>" class="btn btn-light"><i class="fas fa-eye me-2"></i>Leia Mais</a>
-                    </div>
-                </div>
-            <% }); %>
-        </div>           
+  <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="container">
+          <h1 class="display-4 text-white">Design reimaginado - PortalNews</h1>
+          <p class="lead">Fique por dentro das últimas notícias do país e do mundo.</p>
+          <a href="#latest-news" class="btn btn-primary mt-3" id="scrollToLatestNews"><i class="fas fa-newspaper me-2"></i>Confira as Notícias</a>
+        </div>
+      </div>
+
+      <% entertainmentNews.forEach((news, index) => { %>
+        <div class="carousel-item">
+          <div class="container">
+            <h2 class="text-white"><%= news.title %></h2>
+            <p><%= news.content.substring(0, 70) %>...</p>
+            <a href="/news/<%= news._id %>" class="btn btn-light"><i class="fas fa-eye me-2"></i>Leia Mais</a>
+          </div>
+        </div>
+      <% }); %>
+
+      <% politicsNews.forEach((news, index) => { %>
+        <div class="carousel-item">
+          <div class="container">
+            <h2 class="text-white"><%= news.title %></h2>
+            <p><%= news.content.substring(0, 70) %>...</p>
+            <a href="/news/<%= news._id %>" class="btn btn-light"><i class="fas fa-eye me-2"></i>Leia Mais</a>
+          </div>
+        </div>
+      <% }); %>
     </div>
-    <!-- Indicadores de carousel -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    
-    <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+  </div>
+
+  <!-- Indicadores de carousel -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
 </section>
 
 <!-- Notícias Recentes -->
 <section id="latest-news" class="mt-5">
-    <h1 class="mb-4 text-center">Últimas Notícias</h1>
-    
-    <!-- Filtros por Categoria -->
-    <div class="mb-4">
+  <div class="row">
+    <!-- Coluna Principal (Notícias Recentes) -->
+    <div class="col-md-8">
+      <h1 class="mb-4 text-center">Últimas Notícias</h1>
+      
+      <!-- Filtros por Categoria -->
+      <div class="mb-4">
         <div class="btn-group btn-group-categories" role="group" aria-label="Categorias">
-            <a href="/" class="btn btn-outline-secondary <%= selectedCategory === 'All' ? 'active' : '' %>">Todas</a>
-            <a href="/?category=Esportes" class="btn btn-outline-secondary <%= selectedCategory === 'Esportes' ? 'active' : '' %>">Esportes</a>
-            <a href="/?category=Política" class="btn btn-outline-secondary <%= selectedCategory === 'Política' ? 'active' : '' %>">Política</a>
-            <a href="/?category=Entretenimento" class="btn btn-outline-secondary <%= selectedCategory === 'Entretenimento' ? 'active' : '' %>">Entretenimento</a>
-            <a href="/?category=Tecnologia" class="btn btn-outline-secondary <%= selectedCategory === 'Tecnologia' ? 'active' : '' %>">Tecnologia</a>
-            <a href="/?category=Saúde" class="btn btn-outline-secondary <%= selectedCategory === 'Saúde' ? 'active' : '' %>">Saúde</a>
+          <a href="/" class="btn btn-outline-secondary <%= selectedCategory === 'All' ? 'active' : '' %>">Todas</a>
+          <a href="/?category=Esportes" class="btn btn-outline-secondary <%= selectedCategory === 'Esportes' ? 'active' : '' %>">Esportes</a>
+          <a href="/?category=Política" class="btn btn-outline-secondary <%= selectedCategory === 'Política' ? 'active' : '' %>">Política</a>
+          <a href="/?category=Entretenimento" class="btn btn-outline-secondary <%= selectedCategory === 'Entretenimento' ? 'active' : '' %>">Entretenimento</a>
+          <a href="/?category=Tecnologia" class="btn btn-outline-secondary <%= selectedCategory === 'Tecnologia' ? 'active' : '' %>">Tecnologia</a>
+          <a href="/?category=Saúde" class="btn btn-outline-secondary <%= selectedCategory === 'Saúde' ? 'active' : '' %>">Saúde</a>
         </div>
-    </div>
-    
-    <div class="row">
+      </div>
+
+      <!-- Notícias -->
+      <div class="row">
         <% news.forEach(item => { %>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <% if (item.image) { %>
-                        <img src="<%= item.image %>" class="card-img-top img-fluid" alt="Imagem da Notícia">
-                    <% } else { %>
-                        <img src="/uploads/images/default-news.jpg" class="card-img-top img-fluid" alt="Imagem Padrão">
-                    <% } %>
-                    <div class="card-body">
-                        <h5 class="card-title"><%= item.title %></h5>
-                        <p class="card-text"><%= item.content.substring(0, 100) %>...</p>
-                        <a href="/news/<%= item._id %>" class="btn btn-primary float-end"><i class="fas fa-eye me-2"></i>Leia Mais</a>
-                    </div>
-                    <div class="card-footer text-muted" style="font-size: 0.9rem;">
-                        Por <%= item.author %> em <%= new Date(item.createdAt).toLocaleDateString() %>
-                    </div>
-                </div>
+          <div class="col-md-6 mb-4">
+            <div class="card card-press-down h-100">
+              <% if (item.image) { %>
+                <img src="<%= item.image %>" class="img-fluid" alt="Imagem da Notícia">
+              <% } else { %>
+                <img src="/uploads/images/default-news.jpg" class="img-fluid" alt="Imagem Padrão">
+              <% } %>
+              <div class="card-body">
+                <h5 class="card-title"><%= item.title %></h5>
+                <p class="card-text"><%= item.content.substring(0, 100) %>...</p>
+                <a href="/news/<%= item._id %>" class="btn btn-primary float-end">
+                  <i class="fas fa-eye me-2"></i>Leia Mais
+                </a>
+              </div>
+              <div class="card-footer text-muted" style="font-size: 0.9rem;">
+                Por <%= item.author %> em <%= new Date(item.createdAt).toLocaleDateString() %>
+              </div>
             </div>
+          </div>
         <% }) %>
+      </div>
+
+      <!-- Botão de Carregar Mais -->
+      <% if (hasMore) { %>
+        <div class="text-center mt-2">
+          <a href="?page=<%= currentPage + 1 %>&category=<%= selectedCategory === 'All' %>" class="btn btn-outline-success">
+            Carregar Mais
+          </a>
+        </div>
+      <% } %>
     </div>
+
+    <!-- Coluna Lateral (Notícias Populares e Widgets) -->
+    <div class="col-md-4 fixed-col-4 mt-4">
+      <!-- Notícias Populares -->
+      <div class="recent-news bg-white p-4 rounded-2 mb-4">
+        <h5 class="mb-3 border-bottom pb-2">Mais Lidas</h5>
+        <ul class="list-unstyled">
+          <% popularNews.forEach(news => { %>
+            <li class="mb-3">
+              <a href="/news/<%= news._id %>" class="d-flex align-items-center text-dark text-decoration-none hover-effect">
+                <div class="news-thumbnail me-3">
+                  <% if (news.image) { %>
+                    <img src="<%= news.image %>" 
+                         alt="Thumbnail" 
+                         class="img-thumbnail rounded-circle" 
+                         style="width: 50px; height: 50px; object-fit: cover;">
+                  <% } else { %>
+                    <img src="/uploads/images/default-news.jpg" 
+                         alt="Default Thumbnail" 
+                         class="img-thumbnail rounded-circle" 
+                         style="width: 50px; height: 50px; object-fit: cover;">
+                  <% } %>
+                </div>
+                <div class="news-content">
+                  <h6 class="mb-0 text-truncate">
+                    <%= news.title.substring(0, 20) %>...
+                  </h6>
+                  <small class="text-muted">
+                    <%= new Date(news.createdAt).toLocaleDateString() %>
+                  </small>
+                </div>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+      
+      <div class="social-widget rounded-2 mb-4">
+        <h5 class="mb-3 border-bottom pb-2">Siga-nos</h5>
+        <div class="d-flex gap-3">
+          <a href="https://facebook.com" target="_blank" class="btn btn-facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="btn btn-twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="btn btn-instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://youtube.com" target="_blank" class="btn btn-youtube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="news-internacional py-5">
+  <div class="news-content">
+    <h2 class="text-center mb-4">Notícias Internacionais</h2>
+    <div class="row" id="news-container">
+      <p class="text-center">Carregando notícias...</p>
+    </div>
+  </div>
 </section>
 
 <%- include('../partials/footer') %>
 
 <script type="text/javascript">
  document.addEventListener('DOMContentLoaded', function () {
-     const carousel = document.getElementById('newsCarousel');
-     const indicators = document.querySelectorAll('.carousel-indicators button');
+   const carousel = document.getElementById('newsCarousel');
+   const indicators = document.querySelectorAll('.carousel-indicators button');
 
-     // Função para atualizar a classe "active" nos indicadores
-     function updateIndicators() {
-         const activeIndex = Array.from(carousel.querySelectorAll('.carousel-item')).indexOf(carousel.querySelector('.carousel-item.active'));
+   // Função para atualizar a classe "active" nos indicadores
+   function updateIndicators() {
+     const activeIndex = Array.from(carousel.querySelectorAll('.carousel-item')).indexOf(carousel.querySelector('.carousel-item.active'));
+     indicators.forEach((indicator, index) => {
+       if (index === activeIndex) {
+         indicator.classList.add('active');
+       } else {
+         indicator.classList.remove('active');
+       }
+     });
+   }
 
-         indicators.forEach((indicator, index) => {
-             if (index === activeIndex) {
-                 indicator.classList.add('active');
-             } else {
-                 indicator.classList.remove('active');
-             }
-         });
-     }
+   // Escuta o evento 'slid.bs.carousel'
+   carousel.addEventListener('slid.bs.carousel', updateIndicators);
 
-     // Escuta o evento 'slid.bs.carousel'
-     carousel.addEventListener('slid.bs.carousel', updateIndicators);
-
-     updateIndicators();
+   updateIndicators();
  });
 
  document.addEventListener('DOMContentLoaded', function () {
-     const link = document.getElementById('scrollToLatestNews');
-     const targetSection = document.getElementById('latest-news');
+   const link = document.getElementById('scrollToLatestNews');
+   const targetSection = document.getElementById('latest-news');
 
-     link.addEventListener('click', function(event) {
-         event.preventDefault();
-
-         targetSection.scrollIntoView({
-             behavior: 'smooth'
-         });
+   link.addEventListener('click', function(event) {
+     event.preventDefault();
+     targetSection.scrollIntoView({
+       behavior: 'smooth'
      });
+   });
  });
+
+ const API_KEY = '50a5425d394439c0ad897bc7fc8aaad4';
+ const API_URL = `http://api.mediastack.com/v1/news?access_key=${API_KEY}&countries=br,gb&languages=pt&limit=6`;
+ const newsContainer = document.getElementById('news-container');
+
+ async function fetchInternationalNews() {
+   try {
+     const response = await fetch(API_URL);
+     const data = await response.json();
+
+     if (data && data.data.length > 0) {
+       displayNews(data.data);
+     } else {
+       newsContainer.innerHTML = '<p class="text-center text-muted">Nenhuma notícia disponível.</p>';
+     }
+   } catch (error) {
+     newsContainer.innerHTML = '<p class="text-center text-danger">Erro ao carregar notícias. Tente novamente mais tarde.</p>';
+     console.error('Erro ao buscar notícias:', error);
+   }
+ }
+
+ function displayNews(articles) {
+   newsContainer.innerHTML = ''; // Limpa o container
+
+   function truncateText(text, maxLength) {
+     if (text.length > maxLength) {
+       return text.substring(0, maxLength) + '...';
+     }
+   }
+
+   function formatDate(dateString) {
+     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+     return new Date(dateString).toLocaleDateString('pt', options);
+   }
+
+   articles.forEach((article) => {
+     const newsCol = document.createElement('div');
+     newsCol.className = 'col-md-4 mb-4';
+     newsCol.innerHTML = `
+       <div class="card card-press-down news-card">
+         <img src="${article.image || 'https://via.placeholder.com/300x180'}"
+              alt="${article.title}"
+              class="img-fluid">
+         <div class="card-body">
+           <h5 class="card-title">
+             ${article.title}
+           </h5>
+           <p class="card-text">
+             ${truncateText(article.description || 'Descrição indisponível.', 100)}
+           </p>
+           <a href="${article.url}"
+              target="_blank"
+              class="btn btn-primary float-end">
+             <i class="fas fa-eye me-2"></i>Leia mais
+           </a>
+         </div>
+         <div class="card-footer text-muted">
+            <small>Publicado em: ${formatDate(article.publishedAt)}</small>
+        </div>           
+       </div>
+     `;
+
+     newsContainer.appendChild(newsCol);
+   });
+ }
+
+ fetchInternationalNews();
 </script>

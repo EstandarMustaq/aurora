@@ -1,49 +1,125 @@
-<%- include('../partials/header', { title: news.title, user: null, hideNavbar: false}) %>
+<%- include('../partials/header', { title: news.title, user: null, hideNavbar: false }) %>
 
-<article class="mb-5">
-    <h1 class="mb-3"><%= news.title %></h1>
-    <p class="text-muted mb-3">
-        <i class="fas fa-user me-2"></i>Por <%= news.author %>
-        | <i class="fas fa-calendar-alt"></i> <%= new Date(news.createdAt).toLocaleDateString() %>
-        | <i class="fas fa-tag"></i> <%= news.category %>
-    </p>
-    <% if (news.image) { %>
-        <img src="<%= news.image %>" alt="Imagem da Notícia" class="img-fluid mb-4">
-    <% } else { %>
-        <img src="/uploads/images/default-news.jpg" alt="Imagem Padrão" class="img-fluid mb-4">
-    <% } %>
-    <div>
-        <%= news.content %>
-    </div>
-</article>
+<div class="mt-4">
+    <div class="row">
+        <!-- Coluna Principal -->
+        <div class="col-md-8 mb-5">
+            <article class="mb-4">
+                <h1 class="mb-3"><%= news.title %></h1>
+                <p class="text-muted mb-3" style="font-size: 0.85rem;">
+                    <i class="fas fa-user me-1"></i>Por <%= news.author %>
+                    • <i class="fas fa-calendar-alt me-1"></i> <%= new Date(news.createdAt).toLocaleDateString() %>
+                    • <i class="fas fa-tag  me-1"></i> <%= news.category %>
+                </p>
+                <% if (news.image) { %>
+                    <img src="<%= news.image %>" alt="Imagem da Notícia" class="img-fluid mb-4 rounded">
+                <% } else { %>
+                    <img src="/uploads/images/default-news.jpg" alt="Imagem Padrão" class="img-fluid mb-4 rounded">
+                <% } %>
+                <div>
+                    <%= news.content %>
+                </div>
+            </article>
 
-<hr>
+            <!-- Comentários -->
+            <hr class="custom-hr">
+            <h4 class="mb-3">Comentários</h4>
+            <% if (comments.length === 0) { %>
+                <p style="font-size: 0.85rem;">Nenhum comentário ainda. Seja o primeiro a comentar!</p>
+            <% } else { %>
+                <% comments.forEach(comment => { %>
+                    <div class="comment d-flex align-items-start">
+                        <!-- Avatar Dinâmico -->
+                        <div class="avatar me-3">
+                            <span class="avatar-initial" style="background-color: <%= comment.avatarColor %> !important;">
+                                <%= comment.username.charAt(0).toUpperCase() %>
+                            </span>
+                        </div>
+                        <!-- Detalhes do Comentário -->
+                        <div>
+                            <strong><%= comment.username %></strong>
+                            <p style="margin-bottom: 10px;"><%= comment.comment %></p>
+                            <pre class="text-muted" style="margin-bottom: -5px !important; font-size: 0.7rem !important;"><%= new Date(comment.createdAt).toLocaleDateString() %></pre>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
 
-<h3 class="mb-3">Comentários:</h3>
-<% if (comments.length === 0) { %>
-    <p style="font-size: 0.8rem;">Nenhum comentário ainda. Seja o primeiro a comentar!</p>
-<% } else { %>
-    <% comments.forEach(comment => { %>
-        <div class="comment">
-            <strong><%= comment.username %></strong>
-            <p><%= comment.comment %></p>
-            <p class="text-muted"><%= new Date(comment.createdAt).toLocaleDateString() %></p>
+            <!-- Formulário de Comentário -->
+            <h4 class="mt-5">Adicionar Comentário</h4>
+            <form action="/news/<%= news._id %>/comment" method="POST">
+                <div class="input-wrapper mb-3">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="@seunome" required>
+                </div>
+                <div class="mb-3">
+                    <div class="textarea-wrapper">
+                        <textarea class="form-control rich-text" id="comment" name="comment" rows="3" placeholder="Seu comentário aqui!" required></textarea>
+                        <button type="submit" class="send-btn">
+                            <span>Comentar</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
-    <% }) %>
-<% } %>
 
-<h4 class="mt-4">Adicionar Comentário:</h4>
-<form action="/news/<%= news._id %>/comment" method="POST">
-    <div class="mb-3">
-        <label for="username" class="form-label">Seu Nome</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu nome" required>
+        <!-- Coluna Secundária -->
+        <div class="col-md-4 fixed-col-4">
+            <!-- Carousel de Categorias -->
+            <div class="mb-4">
+                <h5 class="mb-3">Categorias</h5>
+                <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <% categories.forEach((category, index) => { %>
+                            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                                <!-- Item do Carousel -->
+                                <div class="carousel-item-content d-flex align-items-center justify-content-center" style="background-image: url('<%= category.image %>');">
+                                    <div class="overlay"></div>
+                                    <h6 class="m-0 text-white text-uppercase"><%= category.name %></h6>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Noticias Recentes-->
+            <div class="recent-news bg-white p-4 rounded-3 mb-4">
+                <h5 class="mb-3 border-bottom pb-2">Notícias Recentes</h5>
+                <ul class="list-unstyled">
+                    <% recentNews.forEach(news => { %>
+                        <li class="mb-3">
+                            <a href="/news/<%= news._id %>" class="d-flex align-items-center text-dark text-decoration-none hover-effect">
+                                <div class="news-thumbnail me-3">
+                                    <% if (news.image) { %>
+                                        <img src="<%= news.image %>" alt="Thumbnail" class="img-thumbnail rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                    <% } else { %>
+                                        <img src="/uploads/images/default-news.jpg" alt="Default Thumbnail" class="img-thumbnail rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                    <% } %>
+                                </div>
+                                <div class="news-content">
+                                    <h6 class="mb-0 text-truncate"><%= news.title.substring(0, 20) %>...</h6>
+                                    <small class="text-muted"><%= new Date(news.createdAt).toLocaleDateString() %></small>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="newsletter bg-white p-4 rounded-3 mb-4">
+                <h5 class="mb-3">Receba Atualizações</h5>
+                <form>
+                    <div class="mb-3 custom-input">
+                        <input type="email" class="form-control" placeholder="Seu e-mail" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">Inscrever-se</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="comment" class="form-label">Seu Comentário</label>
-        <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Digite seu comentário" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-paper-plane me-2"></i>Enviar Comentário</button>
-</form>
+</div>
 
 <%- include('../partials/footer') %>
 

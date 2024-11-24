@@ -1,3 +1,5 @@
+@import url('normalize.css');
+
 /* === 1. Reset Básico === */
 * {
     margin: 0;
@@ -47,10 +49,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem !important;
 }
 
-p {
-    margin-bottom: 1rem !important;
-}
-
 /* === 4. Barra de Navegação === */
 .navbar {
     background-color: var(--color-white) !important;
@@ -76,27 +74,8 @@ p {
     transition: color var(--transition-speed), transform var(--transition-speed) !important;
 }
 
-.navbar-nav .nav-link::after {
-    content: '';
-    display: block;
-    width: 0%;
-    height: 2px;
-    background-color: var(--color-dark-green) !important;
-    transition: width var(--transition-speed) !important;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-}
-
-.navbar-nav .nav-link:hover::after,
-.navbar-nav .nav-link.active::after {
-    width: 100%;
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
+.navbar-nav .nav-link:hover {
     color: var(--color-dark-green) !important;
-    transform: translateY(-2px);
 }
 
 .navbar-toggler {
@@ -172,27 +151,27 @@ p {
 }
 
 /* === 6. Formulários === */
-.form-control {
+.form-decoration .form-control {
     border-left: none;
     border-radius: 10px;
     color: var(--color-dark-gray) !important;
     transition: border-color var(--transition-speed), box-shadow var(--transition-speed) !important;
 }
 
-.form-control {
+.form-decoration .form-control {
     border-color: var(--color-dark-green) !important;
 }
 
-.form-control:focus {
+.form-decoration .form-control:focus {
     box-shadow: none;
 }
 
-.input-group-text {
+.form-decoration .input-group-text {
     border-color: var(--color-dark-green) !important;
     border-radius: 10px;
 }
 
-.form-label {
+.form-decoration .form-label {
     font-weight: 600;
     color: var(--color-dark-gray) !important;
 }
@@ -203,6 +182,10 @@ p {
     border: none;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
     transition: transform var(--transition-speed), box-shadow var(--transition-speed) !important;
+}
+
+.card {
+    perspective: 1000px;
 }
 
 .card-header {
@@ -219,6 +202,20 @@ p {
     background-color: var(--color-white);
     color: var(--color-dark-gray);
     border: none;
+}
+
+@media(hover: hover) {
+    .card-press-down:hover {
+        transform: scale(0.98);
+        filter: brightness(0.96);
+    }
+}
+
+@media(hover: none) {
+    .card-press-down:active {
+        transform: scale(0.98);
+        filter: brightness(0.96);
+    }
 }
 
 /* === 8. Tabelas === */
@@ -287,23 +284,288 @@ p {
     to { opacity: 1; }
 }
 
-/* === 10. Comentários === */
+.custom-hr {
+    margin: 20px auto;
+    border: 0;
+    height: 1px;
+    background: var(--color-dark-gray);
+}
+
+/* === 10. Avatares Dinâmicos === */
+.avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    font-size: 1.2rem;
+    color: var(--color-white);
+}
+
+.avatar-initial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+/* === Comentários === */
 .comment {
     background-color: #f9f9f9 !important;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 1rem;
     margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-.comment strong {
-    color: var(--color-dark-green);
+.textarea-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.comment p {
-    margin-top: 0.5rem;
-    color: var(--color-dark-gray);
+.input-wrapper .form-control {
+    border-radius: 0.5rem;
+}
+
+.input-wrapper .form-control:focus {
+    box-shadow: none !important;
+    border-color: var(--color-dark-green) !important;
+}
+
+.textarea-wrapper .rich-text {
+    width: 100%;
+    padding-right: 0.75rem !important; /* Espaço para o botão */
+    resize: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.textarea-wrapper .rich-text:focus {
+    box-shadow: none !important;
+    border-color: var(--color-dark-green) !important;
+}
+
+.textarea-wrapper .send-btn {
+    position: absolute;
+    top: 70%;
+    right: 1rem;
+    transform: translateY(-50%);
+    background-color: var(--color-dark-green);
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    overflow: visible;
+}
+
+.textarea-wrapper .send-btn i {
+    font-size: 1rem;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.textarea-wrapper .send-btn span {
+    font-size: 0.9rem;
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    white-space: nowrap;
+    transition: right 0.3s ease, opacity 0.3s ease;
+}
+
+.textarea-wrapper .send-btn:hover {
+    background-color: var(--color-light-green);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.textarea-wrapper .send-btn:hover span {
+    right: 1.8rem;
+    opacity: 1;
+    color: var(--color-white);
+    background-color: var(--color-light-green);
+    padding: 0.2rem 0.75rem 0.25rem 0.5rem;
+    border-radius: 15px;
+}
+
+.textarea-wrapper .send-btn:hover i {
+    transform: scale(1.1);
+}
+
+@media (max-width: 576px) {
+
+    .textarea-wrapper .rich-text {
+        min-height: 100px;
+        padding: 0.8rem;
+    }
+    
+    .textarea-wrapper .send-btn {
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.875rem;
+    }
+}
+
+.carousel-item-content {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Overlay para escurecer a imagem */
+.carousel-item-content .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.carousel-item-content h6 {
+    position: relative;
+    z-index: 2;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); /* Adiciona contraste ao texto */
+}
+
+.custom-input .form-control:focus {
+    border-color: var(--color-dark-gray) !important;
+    box-shadow: none !important;
+}
+
+.fixed-col-4 {
+    position: sticky;
+    top: 90px;
+    align-self: start;
+}
+
+.recent-news {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.recent-news h5 {
+    color: var(--color-dark-gray) !important;
+    font-weight: bold;
+    border-bottom: 1px solid;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+}
+
+.recent-news ul {
+    margin: 0;
+    padding: 0;
+}
+
+.recent-news li {
+    list-style: none;
+    transition: all 0.2s ease;
+}
+
+.recent-news li:hover {
+    transform: translateX(4px);
+}
+
+.recent-news a {
+    text-decoration: none;
+    color: var(--color-dark-gray) !important;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.recent-news a:hover {
+    color: var(--color-light-green) !important;
+}
+
+.recent-news .news-thumbnail img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--color-light-green);
+}
+
+.recent-news .news-content h6 {
+    font-size: 0.95rem;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.recent-news .news-content small {
+    font-size: 0.75rem;
+    color: #888 !important;
+}
+
+.social-widget {
+    background-color: var(--color-white);
+    padding: 1.5rem;
+}
+
+.social-widget .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-widget .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.social-widget .btn-facebook {
+    background-color: #1877F2;
+    color: var(--color-white);
+}
+
+.social-widget .btn-twitter {
+    background-color: #1DA1F2;
+    color: var(--color-white);
+}
+
+.social-widget .btn-instagram {
+    background: radial-gradient(circle at 30% 30%, #feda75, #d62976, #962fbf);
+    color: var(--color-white);
+}
+
+.social-widget .btn-youtube {
+    background-color: #FF0000;
+    color: var(--color-white);
 }
 
 /* === 11. Gráficos === */
@@ -317,9 +579,15 @@ img.img-fluid {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     object-fit: cover;
-    max-height: 256px;
-    width: 100vh;
+    max-height: 180px;
+    width: 100%;
     transition: transform var(--transition-speed) !important;
+}
+
+.news-card img {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
 }
 
 /* === 13. Botões de Ação no Admin === */
@@ -341,19 +609,9 @@ a:hover {
 }
 
 /* === 15. Responsividade === */
-@media (max-width: 1024px) {
-    .main-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
 @media (max-width: 768px) {
     .navbar-nav {
         margin-top: 10px;
-    }
-
-    .main-grid {
-        grid-template-columns: 1fr;
     }
 
     .card-body {
@@ -388,20 +646,14 @@ a:hover {
     }
 }
 
-/* === 16. Animações e Microinterações === */
-.card {
-    perspective: 1000px;
-}
-
-/* === Hero Section === */
+/* === 16. Hero Section === */
 .hero-carousel {
     background: linear-gradient(135deg, var(--color-dark-gray) 0%, var(--color-light-gray) 70%);
     padding: 120px 30px;
     color: var(--color-white) !important;
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
     height: 380px;
 }
 
@@ -418,7 +670,7 @@ a:hover {
 }
 
 .hero-carousel:hover::before {
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .hero-carousel .container {
@@ -438,50 +690,6 @@ a:hover {
     font-size: 1.4rem;
     margin-bottom: 30px;
     color: #dcdcdc;
-}
-
-/* Estilos para os botões de controle do Carousel */
-.carousel-control-prev,
-.carousel-control-next {
-    margin-top: 160px;
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
-    width: 50px;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    mask-size: cover;
-}
-
-.carousel-control-prev-icon {
-    mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path d="M4.03 0L0 4l4.03 4L5.09 7.03 2.06 4l3.03-3.03z" fill="%23000"/></svg>');
-}
-
-.carousel-control-next-icon {
-    mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path d="M3.97 0L8 4 3.97 8 2.91 6.97 5.94 4 2.91 1.03z" fill="%23000"/></svg>');
-}
-
-/* Adiciona efeito de sombra no ícone ao passar o mouse */
-.carousel-control-prev:hover .carousel-control-prev-icon,
-.carousel-control-next:hover .carousel-control-next-icon {
-    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.7);
 }
 
 /* responsividade */
@@ -527,9 +735,9 @@ a:hover {
 /* Estilo para os botões individuais */
 .btn-group-categories .btn {
     flex: 0 0 auto; /* Evita que os botões se estiquem */
-    padding: 5px 5px;
+    padding: 2px 2px;
     font-size: 16px;
-    border-radius: 8px;
+    border-radius: 5px;
     min-width: 100px;
     white-space: nowrap; /* Evita que o texto quebre em múltiplas linhas */
 }
@@ -549,7 +757,7 @@ a:hover {
     }
 
     .btn-group-categories .btn {
-        min-width: 183px;
+        min-width: 118px;
     }
 }
 
@@ -559,12 +767,6 @@ a:hover {
     border-color: var(--color-light-green);
     transition: transform 0.2s ease-in-out, background-color 0.2s, border-color 0.2s;
 }
-
-/* Rolagem Suave para Links Internos */
-html {
-    scroll-behavior: smooth;
-}
-
 
 /* ===  Login Container e Card === */
 .login-container {

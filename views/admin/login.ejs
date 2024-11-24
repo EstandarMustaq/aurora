@@ -1,4 +1,4 @@
-<%- include('../partials/header', { title: 'Login', user: null, hideNavbar: true }) %>
+<%- include('../partials/header', { title: 'Login', user: null, hideNavbar: true, showFooter: false }) %>
 
 <div class="login-container">
     <div class="login-card">
@@ -12,7 +12,7 @@
                 </div>
             <% } %>
             <form action="/admin/login" method="POST">
-                <div class="mb-3">
+                <div class="mb-4 form-decoration">
                     <label for="username" class="form-label">Usuário</label>
                     <div class="input-group">
                         <span class="input-group-text" id="username-addon">
@@ -21,7 +21,7 @@
                         <input type="text" class="form-control bg-light" id="username" name="username" placeholder="Digite seu usuário" aria-describedby="username-addon" required>
                     </div>
                 </div>
-                <div class="mb-4">
+                <div class="mb-4 form-decoration">
                     <label for="password" class="form-label">Senha</label>
                     <div class="input-group">
                         <span class="input-group-text" id="password-addon">
@@ -38,5 +38,4 @@
     </div>
 </div>
 
-<%- include('../partials/footer') %>
-
+<%- include('../partials/footer', {showFooter: false}) %>
