@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %> - portalnews</title>
+    <meta property="og:title" content="Aurora Portal de Notícias - Informação ao Seu Alcance">
+    <meta property="og:description" content="Aurora acredita que o acesso à informação é um direito de todos. Nossa missão é informar e entreter de forma leve e acessível. Com entusiasmo, anunciamos que nossa página está disponível, garantindo acesso livre à informação de qualidade.">
+    <meta property="og:image" content="https://portalnewsmz.vercel.app/images/img-share-page.png">
+    <meta property="og:url" content="https://portalnewsmz.vercel.app">
+    <meta property="og:type" content="website">
+    <title><%= title %> - Aurora Portal de Notícias</title>
+    <link href="/images/icons/aurora-logo-hg.ico?v=2" rel="icon" type="image/x-icon" sizes="32x32" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +28,11 @@
     <nav class="navbar navbar-expand-md">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <i class="fas fa-newspaper me-2"></i>portalnews
+                <img src="/images/icons/aurora-logo.ico"
+                     alt="aurora-logo"
+                     width="128"
+                     height="32"
+                />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
