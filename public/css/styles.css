@@ -72,6 +72,7 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-dark-gray) !important;
     position: relative;
     transition: color var(--transition-speed), transform var(--transition-speed) !important;
+    margin-left: 20px;
 }
 
 .navbar-nav .nav-link:hover {
@@ -579,13 +580,13 @@ img.img-fluid {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     object-fit: cover;
-    max-height: 180px;
+    max-height: 250px;
     width: 100%;
     transition: transform var(--transition-speed) !important;
 }
 
 .news-card img {
-    height: 180px;
+    height: 250px;
     object-fit: cover;
     width: 100%;
 }
@@ -781,7 +782,7 @@ a:hover {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     padding: 30px;
-    max-width: 400px;
+    max-width: 370px;
     width: 100%;
 }
 

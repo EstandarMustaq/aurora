@@ -23,7 +23,7 @@ exports.getAllNews = async (req, res) => {
             .limit(limit);
 
         const entertainmentNews = await News.find({ category: 'Saúde' }).limit(2);
-        const politicsNews = await News.find({ category: 'Tecnologia' }).limit(2);
+        const tecnologiesNews = await News.find({ category: 'Tecnologia' }).limit(2);
         const popularNews = await News.find().sort({ views: -1 }).limit(3);
 
         // Verifica se há mais notícias para carregar
@@ -33,7 +33,7 @@ exports.getAllNews = async (req, res) => {
         res.render('news/index', { 
             news,
             entertainmentNews,
-            politicsNews,
+            tecnologiesNews,
             popularNews,
             selectedCategory: category || 'All',
             currentPage: parseInt(page),
@@ -72,11 +72,11 @@ exports.getNewsDetail = async (req, res) => {
 
         // Mapea categorias para incluir imagens
         const categoryImages = {       
-            Esportes: "/uploads/images/news.category/category-esportes.png",
-            Política: "/uploads/images/news.category/category-politica.jpg",
-            Entretenimento: "/uploads/images/news.category/category-entertenimento.jpg",
-            Tecnologia: "/uploads/images/news.category/category-tecnologia.jpg",
-            Saúde: "/uploads/images/news.category/category-saude.jpg",
+            Esportes: "/uploads/images/newsCategory/category-esportes.png",
+            Política: "/uploads/images/newsCategory/category-politica.jpg",
+            Entretenimento: "/uploads/images/newsCategory/category-entertenimento.jpg",
+            Tecnologia: "/uploads/images/newsCategory/category-tecnologia.jpg",
+            Saúde: "/uploads/images/newsCategory/category-saude.jpg",
         };
                
         const categories = categoriesFromDB.map(category => ({
