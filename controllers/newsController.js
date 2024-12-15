@@ -93,7 +93,7 @@ exports.getNewsDetail = async (req, res) => {
         // Buscar as 5 notícias mais recentes, excluindo a notícia atual
         const recentNews = await News.find({ _id: { $ne: req.params.id } })
             .sort({ createdAt: -1 })
-            .limit(4);
+            .limit(3);
 
         res.render('news/detail', { 
             news: newsItem, 
