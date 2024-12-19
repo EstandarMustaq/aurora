@@ -74,11 +74,11 @@
                     data: '_id',
                     render: function(data, type, row) {
                         return `
-                            <a href="/admin/edit/${data}" class="btn btn-warning btn-sm">
+                            <a href="/admin/edit/${data}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editar Notícia ">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form action="/admin/news/${data}?_method=DELETE" method="POST" style="display:inline;">
-                                <button type="submit" class="btn btn-danger btn-sm">
+                                <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Excluir Notícia">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </form>
