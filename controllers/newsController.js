@@ -22,8 +22,8 @@ exports.getAllNews = async (req, res) => {
             .skip(skip)
             .limit(limit);
 
-        const entertainmentNews = await News.find({ category: 'Saúde' }).limit(2);
-        const tecnologiesNews = await News.find({ category: 'Tecnologia' }).limit(2);
+        const entertainmentNews = await News.find({ category: 'Saúde' }).limit(1);
+        const tecnologiesNews = await News.find({ category: 'Tecnologia' }).limit(1);
         const popularNews = await News.find().sort({ views: -1 }).limit(3);
 
         // Verifica se há mais notícias para carregar
@@ -51,10 +51,10 @@ exports.getAllNews = async (req, res) => {
  * @returns {string} - Cor hexadecimal.
  */
 function getAvatarColor(username) {
-    const colors = ['#2e8b57',
+    const colors = ['#e67e22',
+                    '#2e8b57',
                     '#32cd75',
-                    '#0073e6',
-                    '#e67e22'
+                    '#0073e6'
                    ];
     const index = username.charCodeAt(0) % colors.length;
     return colors[index];

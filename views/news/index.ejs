@@ -43,7 +43,7 @@
 </section>
 
 <!-- Notícias Recentes -->
-<section id="latest-news" class="mt-5">
+<section id="latest-news" class="mt-2">
   <div class="row">
     <!-- Coluna Principal (Notícias Recentes) -->
     <div class="col-md-8">
@@ -65,7 +65,7 @@
       <div class="row">
         <% news.forEach(item => { %>
           <div class="col-md-6 mb-4">
-            <div class="card card-press-down card-custom h-100">
+            <div class="card card-press-down shadow-sm h-100">
               <% if (item.image) { %>
                 <img src="<%= item.image %>" class="img-fluid" alt="Imagem da Notícia">
               <% } else { %>
@@ -97,9 +97,9 @@
     </div>
 
     <!-- Coluna Lateral (Notícias Populares e Widgets) -->
-    <div class="col-md-4 fixed-col-4 mt-4">
+    <div class="col-md-4 fixed-col-4 mt-3">
       <!-- Notícias Populares -->
-      <div class="recent-news bg-white p-4 rounded-2 mb-4">
+      <div class="recent-news bg-white p-4 rounded-2 mb-4 shadow-sm">
         <h5 class="mb-3 border-bottom pb-2">Mais Lidas</h5>
         <ul class="list-unstyled">
           <% popularNews.forEach(news => { %>
@@ -112,7 +112,7 @@
                          class="img-thumbnail rounded-circle" 
                          style="width: 50px; height: 50px; object-fit: cover;">
                   <% } else { %>
-                    <img src="/uploads/images/default-news.jpg" 
+                    <img src="/uploads/images/default-news.jpg"
                          alt="Default Thumbnail" 
                          class="img-thumbnail rounded-circle" 
                          style="width: 50px; height: 50px; object-fit: cover;">
@@ -132,7 +132,7 @@
         </ul>
       </div>
       
-      <div class="social-widget rounded-2 mb-4">
+      <div class="social-widget rounded-2 mb-4 shadow-sm">
         <h5 class="mb-3 border-bottom pb-2">Siga-nos</h5>
         <div class="d-flex gap-3">
           <a href="https://facebook.com" target="_blank" class="btn btn-facebook">
@@ -151,7 +151,7 @@
       </div>
 
       <!-- Newsletter -->
-      <div class="newsletter bg-white p-4 rounded-3 mb-4">
+      <div class="newsletter bg-white p-4 rounded-3 mb-4 shadow-sm">
         <h5 class="mb-3">Receba Atualizações</h5>
         <form>
           <div class="mb-3 custom-input">

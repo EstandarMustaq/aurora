@@ -25,7 +25,7 @@
 </head>
 <body>
     <% if (!hideNavbar) { %>
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar navbar-expand-md shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="/images/icons/aurora-logo.ico"
@@ -45,16 +45,102 @@
                             <a class="nav-link" href="/admin"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/logout"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                            <a class="btn float-end gradient-button d-flex align-items-center" href="/admin/logout"><i class="fas fa-sign-out-alt me-2"></i>Sair</a>
                         </li>
                     <% } else { %>
+                        <!-- Link Contato com Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle custom-toggle" href="#" id="contactoDropdown" role="button" aria-expanded="false">
+                                Contato<i class="fas fa-chevron-down ms-2"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-mega dropdown-menu-end" aria-labelledby="contactoDropdown">
+                                <div class="row">
+                                    <!-- Redes Sociais -->
+                                    <div class="col-md-6">
+                                        <h6 class="dropdown-header">Nossas Redes</h6>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fab fa-facebook-f me-2"></i>Facebook
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fab fa-twitter me-2"></i>Twitter
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fab fa-instagram me-2"></i>Instagram
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fab fa-linkedin-in me-2"></i>LinkedIn
+                                        </a>
+                                    </div>
+                                    <!-- Outras Opções -->
+                                    <div class="col-md-6">
+                                        <h6 class="dropdown-header">Outras Opções</h6>
+                                        <a class="dropdown-item mb-3" href="#">
+                                            <i class="fas fa-envelope me-2"></i>auroranews.com.mz                                           
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>                    
+                    
+                        <!-- Link Sobre com Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle custom-toggle" href="#" id="sobreDropdown" role="button" aria-expanded="false">
+                                Sobre nós<i class="fas fa-chevron-down ms-2"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-mega dropdown-menu-end mb-2" aria-labelledby="sobreDropdown">
+                                <div class="row">
+                                    <!-- Coluna Links -->
+                                    <div class="col-md-6 mb-2">
+                                        <a class="dropdown-item sobre-link" href="#" data-info="sobre-nos">
+                                            <i class="fas fa-user-circle me-2"></i>Quem somos
+                                        </a>
+                                        <a class="dropdown-item sobre-link" href="#" data-info="politica">
+                                            <i class="fas fa-shield-alt me-2"></i>Política de Privacidade
+                                        </a>
+                                        <a class="dropdown-item sobre-link" href="#" data-info="termos">
+                                            <i class="fas fa-file-contract me-2"></i>Termos de Serviço
+                                        </a>
+                                    </div>
+                                    <!-- Coluna de Informações -->
+                                    <div class="col-md-6 px-5" id="sobreInfo">
+                                        <p class="text-muted small">Passe o mouse nos links ao lado para ver informações aqui.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/login"><i class="fas fa-sign-in-alt me-2"></i>Login</a>
+                            <a class="btn float-end gradient-button d-flex align-items-center" href="/admin/login">
+                                <i class="fas fa-sign-in-alt me-2"></i>Entrar
+                            </a>
                         </li>
                     <% } %>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+         const sobreLinks = document.querySelectorAll(".sobre-link");
+         const infoBox = document.getElementById("sobreInfo");
+         const infoContent = {
+             "sobre-nos": "Conheça mais sobre nossa história, valores e missão.",
+             "politica": "Leia nossa Política de Privacidade para saber como tratamos seus dados.",
+             "termos": "Confira os Termos de Serviço antes de utilizar nossos serviços."
+         };
+
+         sobreLinks.forEach(link => {
+             link.addEventListener("mouseenter", function () {
+                 const infoKey = link.getAttribute("data-info");
+                 infoBox.innerHTML = `<p class="text-muted small">${infoContent[infoKey]}</p>`;
+             });
+
+             link.addEventListener("mouseleave", function () {
+                 infoBox.innerHTML = `<p class="text-muted small">Passe o mouse nos links ao lado para ver informações aqui.</p>`;
+             });
+         });
+     });
+    </script>
     <% } %>
+
     <div class="container mt-3">

@@ -11,7 +11,7 @@
 :root {
     /* Cores Neutras */
     --color-dark-gray: #2c2c2c;
-    --color-light-gray: #f0f0f0;
+    --color-light-gray: #f9f9f9;
     --color-white: #ffffff;
     
     /* Cores Verdes */
@@ -55,28 +55,112 @@ h1, h2, h3, h4, h5, h6 {
     position: sticky;
     top: 0;
     z-index: 1000;
+    padding: 0.30rem;
 }
 
 .navbar-nav .nav-link {
     color: var(--color-dark-gray) !important;
     position: relative;
     transition: color var(--transition-speed), transform var(--transition-speed) !important;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .navbar-nav .nav-link:hover {
     color: var(--color-dark-green) !important;
 }
 
+.gradient-button {
+    background: linear-gradient(to right, #2e8b57, #3cb371);
+    color: var(--color-white);
+    font-size: 0.85rem; 
+    font-weight: 600;
+    padding: 10px 12px; 
+    border: none;
+    border-radius: 10px !important;
+    transition: all 0.3s ease; 
+}
+
+/* Hover Effect */
+.gradient-button:hover {
+    background: linear-gradient(to right, #3cb371, #2e8b57);
+    color: var(--color-white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); 
+}
+
 .navbar-toggler {
     box-shadow: none !important;
     border: none;
+    margin-right: -10px !important;
+}
+
+/* Mega Dropdown */
+.dropdown-menu.dropdown-mega {
+    width: 500px;
+    padding: 1.2rem 0;
+    background-color: var(--color-white);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 5px;
+    right: 0; 
+    left: auto;
+    transform: translateX(0); 
+}
+
+.dropdown-header {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+/* Para telas menores */
+@media (max-width: 576px) {
+    .dropdown-menu.dropdown-mega {
+        width: 100%; 
+        position: static;
+        box-shadow: none;
+    }
+}
+
+.custom-toggle::after {
+    display: none !important;
+}
+
+.dropdown-item i {
+   display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background: #f1f1f1;;
+    color: var(--color-dark-green);
+    transition: background var(--transition-speed), transform var(--transition-speed);
+}
+
+.dropdown-item:hover i {
+    color: var(--color-dark-green);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ícones de Seta */
+.dropdown i {
+    transition: transform 0.3s ease;
+}
+
+.dropdown:hover .nav-link i {
+    transform: rotate(-180deg);
 }
 
 /* === 5. Botões === */
 .btn {
     border-radius: 50px;
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem 0.8rem;
     font-weight: 600;
     transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed) !important;
 }
@@ -171,10 +255,6 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--color-white) !important;
     border: none;
     transition: transform var(--transition-speed), box-shadow var(--transition-speed) !important;
-}
-
-.card-custom {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
 }
 
 .card {
@@ -285,16 +365,37 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* === 10. Avatares Dinâmicos === */
+.comments-container {
+    max-height: 270px;
+    overflow-y: auto;
+    padding-right: 10px;
+    scrollbar-color: rgba(0, 0, 0, 0.06) transparent;
+}
+
+.comments-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.comments-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+}
+
+.comments-container::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
 .avatar {
-    width: 40px;
-    height: 40px;
-    display: flex;
+    width: 50px;
+    height: 50px;
+    display: flex;  
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    overflow: hidden;
+    overflow: hidden;      
     font-size: 1.2rem;
     color: var(--color-white);
+    flex-shrink: 0; /* Evita que o avatar diminua */
 }
 
 .avatar-initial {
@@ -307,14 +408,65 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
-/* === Comentários === */
 .comment {
-    background-color: #f9f9f9 !important;
     border-radius: 5px;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+    flex: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.comment-details {
+    line-height: 1.3;
+}
+
+.comment-details strong {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.comment-details p {
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.comment-details .text-muted {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Estilo para a barra ao lado do texto */
+.section-title {
+    position: relative;
+    padding-left: 20px;
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%; 
+    width: 8px; 
+    border-radius: 8px; 
+}
+
+.section-title-green::before {
+    background-color: rgba(40, 167, 69, 0.8); /* Verde */
+}
+
+.section-title-red::before {
+    background-color: rgba(220, 53, 69, 0.8); /* Vermelho */
+}
+
+.section-title-blue::before {
+    background-color: rgba(23, 162, 184, 0.8); /* Azul */
+}
+
+.section-title-purple::before {
+    background-color: rgba(102, 16, 242, 0.8); /* Roxo */
 }
 
 .textarea-wrapper {
@@ -627,7 +779,7 @@ a:hover {
 @media (max-width: 576px) {
     .btn {
         font-size: 0.9rem;
-        padding: 0.5rem 75rem;
+        padding: 0.5rem 0.75rem;
     }
 
     .card-header, .card-footer {
@@ -739,7 +891,7 @@ a:hover {
 }
 
 /* Ajustes para telas maiores (desktop) */
-@media (min-width: 769px) {
+@media (min-width: 768px) {
     .btn-group-categories {
         justify-content: center;
         overflow-x: visible;
@@ -934,4 +1086,3 @@ a:hover {
         line-height: 40px;
     }
 }
-
