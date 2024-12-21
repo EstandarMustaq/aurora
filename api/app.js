@@ -76,29 +76,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(methodOverride('_method'));
-app.use(express.static(path.join(__dirname, 'public')));
-//app.set('views', path.join(__dirname, '../views'));
+app.use(express.static(path.join(__dirname, '../public')));
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
 // Cache-Control e ETag
 app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'public, max-age=3600'); // Cache por 1 hora
+    res.setHeader('Cache-Control', '../public, max-age=3600'); // Cache por 1 hora
     next();
 });
 
 // Routas
 app.use('/', async (req, res, next) => {
-    const route = await import('./routes/index.js');
+    const route = await import('../routes/index.js');
     route.default(req, res, next);
 });
 
 app.use('/admin', async (req, res, next) => {
-    const route = await import('./routes/admin.js');
+    const route = await import('../routes/admin.js');
     route.default(req, res, next);
 });
 
 app.use('/api', async (req, res, next) => {
-    const route = await import('./routes/api.js');
+    const route = await import('../routes/api.js');
     route.default(req, res, next);
 });
 
