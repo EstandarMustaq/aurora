@@ -2,7 +2,6 @@
 
 <div class="mt-4">
     <div class="row">
-        <!-- Coluna Principal -->
         <div class="col-md-8 mb-5">
             <article class="mb-4">
                 <h1 class="mb-3"><%= news.title %></h1>
@@ -12,36 +11,48 @@
                     • <i class="fas fa-tag  me-1"></i> <%= news.category %>
                 </p>
                 <% if (news.image) { %>
-                    <img src="<%= news.image %>" alt="Imagem da Notícia" class="img-fluid mb-4 rounded">
+                    <img src="<%= news.image %>"
+                         alt="Imagem da Notícia"
+                         class="img-fluid mb-4 rounded"
+                    >
                 <% } else { %>
-                    <img src="/uploads/images/defaultNews.jpg" alt="Imagem Padrão" class="img-fluid mb-4 rounded">
+                    <img src="/uploads/images/defaultNews.jpg"
+                         alt="Imagem Padrão"
+                         class="img-fluid mb-4 rounded"
+                    >
                 <% } %>
                 <div>
                     <%= news.content %>
                 </div>
             </article>
 
-            <!-- Comentários -->
             <hr class="custom-hr">
             <h4 class="section-title section-title-green mb-4">Comentários</h4>
             <% if (comments.length === 0) { %>
-                <p style="font-size: 0.85rem;">Nenhum comentário ainda. Seja o primeiro a comentar!</p>
+                <p style="font-size: 0.85rem;">
+                    Nenhum comentário ainda. Seja o primeiro a comentar!
+                </p>
             <% } else { %>
                 <div class="comments-container">
                     <% comments.slice(0, 3).forEach(comment => { %>
                         <div class="d-flex align-items-start mb-3">
-                            <!-- Avatar Dinâmico (fora do container principal) -->
                             <div class="avatar me-2">
-                                <span class="avatar-initial" style="background-color: <%= comment.avatarColor %> !important;">
+                                <span class="avatar-initial"
+                                      style="background-color: <%= comment.avatarColor %> !important;"
+                                >
                                     <%= comment.username.charAt(0).toUpperCase() %>
                                 </span>
                             </div>
-                            <!-- Container Principal do Comentário -->
                             <div class="comment bg-white p-3 shadow-sm">
-                                <!-- Detalhes do Comentário -->
                                 <div class="comment-details">
-                                    <strong class="d-block mb-1"><%= comment.username %></strong>
-                                    <p class="mb-2" style="font-size: 0.9rem;"><%= comment.comment %></p>
+                                    <strong class="d-block mb-1">
+                                        <%= comment.username %>
+                                    </strong>
+                                    <p class="mb-2"
+                                       style="font-size: 0.9rem;"
+                                    >
+                                        <%= comment.comment %>
+                                    </p>
                                     <span class="text-muted">
                                         <%= new Date(comment.createdAt).toLocaleDateString() %>
                                     </span>
@@ -52,14 +63,24 @@
                 </div>
             <% } %>
 
-            <!-- Formulário de Comentário -->
             <h4 class="section-title section-title-red mt-5">Adicionar Comentário</h4>
             <form action="/news/<%= news._id %>/comment" method="POST">
                 <div class="input-wrapper mb-3">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="@seunome" required>
+                    <input type="text"
+                           class="form-control"
+                           id="username"
+                           name="username"
+                           placeholder="@seunome"
+                           required>
                 </div>
                 <div class="textarea-wrapper">
-                    <textarea class="form-control rich-text" id="comment" name="comment" rows="3" placeholder="Seu comentário aqui!" required></textarea>
+                    <textarea class="form-control rich-text"
+                              id="comment"
+                              name="comment"
+                              rows="3"
+                              placeholder="Seu comentário aqui!"
+                              required>
+                    </textarea>
                     <button type="submit" class="send-btn">
                         <span>Comentar</span>
                         <i class="fas fa-paper-plane"></i>
@@ -68,17 +89,18 @@
             </form>
         </div>
 
-        <!-- Coluna Secundária -->
         <div class="col-md-4 fixed-col-4">
-            <!-- Carousel de Categorias -->
             <div class="mb-4">
                 <h5 class="section-title section-title-purple mb-3">Categorias</h5>
-                <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div id="categoryCarousel"
+                     class="carousel slide"
+                     data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <% categories.forEach((category, index) => { %>
                             <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                                <!-- Item do Carousel -->
-                                <div class="carousel-item-content d-flex align-items-center justify-content-center" style="background-image: url('<%= category.image %>');">
+                                <div class="carousel-item-content d-flex align-items-center justify-content-center"
+                                     style="background-image: url('<%= category.image %>');"
+                                >
                                     <div class="overlay"></div>
                                     <h6 class="m-0 text-white text-uppercase"><%= category.name %></h6>
                                 </div>
@@ -88,18 +110,26 @@
                 </div>
             </div>
 
-            <!-- Noticias Recentes-->
             <div class="recent-news bg-white p-4 rounded-3 mb-4 shadow-sm">
                 <h5 class="mb-3 border-bottom pb-2">Notícias Recentes</h5>
                 <ul class="list-unstyled">
                     <% recentNews.forEach(news => { %>
                         <li class="mb-3">
-                            <a href="/news/<%= news._id %>" class="d-flex align-items-center text-dark text-decoration-none hover-effect">
+                            <a href="/news/<%= news._id %>"
+                               class="d-flex align-items-center text-dark text-decoration-none hover-effect">
                                 <div class="news-thumbnail me-3">
                                     <% if (news.image) { %>
-                                        <img src="<%= news.image %>" alt="Thumbnail" class="img-thumbnail rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                        <img src="<%= news.image %>"
+                                             alt="Thumbnail"
+                                             class="img-thumbnail rounded-circle"
+                                             style="width: 50px; height: 50px; object-fit: cover;"
+                                        >
                                     <% } else { %>
-                                        <img src="/uploads/images/default-news.jpg" alt="Default Thumbnail" class="img-thumbnail rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                        <img src="/uploads/images/defaultNews.jpg"
+                                             alt="Default Thumbnail"
+                                             class="img-thumbnail rounded-circle"
+                                             style="width: 50px; height: 50px; object-fit: cover;"
+                                        >
                                     <% } %>
                                 </div>
                                 <div class="news-content">
@@ -112,7 +142,6 @@
                 </ul>
             </div>
 
-            <!-- Newsletter -->
             <div class="newsletter bg-white p-4 rounded-3 mb-4 shadow-sm">
                 <h5 class="mb-3">Receba Atualizações</h5>
                 <form>

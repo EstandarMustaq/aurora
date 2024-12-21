@@ -59,7 +59,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-nav .nav-link {
-    color: var(--color-dark-gray) !important;
     position: relative;
     transition: color var(--transition-speed), transform var(--transition-speed) !important;
     margin-left: 10px;

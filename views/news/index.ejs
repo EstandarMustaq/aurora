@@ -1,6 +1,5 @@
 <%- include('../partials/header', { title: 'Home', user: null, hideNavbar: false}) %>
 
-<!-- Hero com Carousel -->
 <section class="hero-carousel text-center text-white d-flex align-items-center justify-content-center">
   <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -33,8 +32,6 @@
       <% }); %>
     </div>
   </div>
-
-  <!-- Indicadores de carousel -->
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -42,14 +39,10 @@
   </div>
 </section>
 
-<!-- Notícias Recentes -->
 <section id="latest-news" class="mt-2">
   <div class="row">
-    <!-- Coluna Principal (Notícias Recentes) -->
     <div class="col-md-8">
       <h1 class="mb-4 text-center">Últimas Notícias</h1>
-      
-      <!-- Filtros por Categoria -->
       <div class="mb-4">
         <div class="btn-group btn-group-categories" role="group" aria-label="Categorias">
           <a href="/" class="btn btn-outline-secondary <%= selectedCategory === 'All' ? 'active' : '' %>">Todas</a>
@@ -61,7 +54,6 @@
         </div>
       </div>
 
-      <!-- Notícias -->
       <div class="row">
         <% news.forEach(item => { %>
           <div class="col-md-6 mb-4">
@@ -86,7 +78,6 @@
         <% }) %>
       </div>
 
-      <!-- Botão de Carregar Mais -->
       <% if (hasMore) { %>
         <div class="text-center mt-2">
           <a href="?page=<%= currentPage + 1 %>&category=<%= selectedCategory === 'All' %>" class="btn btn-outline-success">
@@ -96,9 +87,7 @@
       <% } %>
     </div>
 
-    <!-- Coluna Lateral (Notícias Populares e Widgets) -->
     <div class="col-md-4 fixed-col-4 mt-3">
-      <!-- Notícias Populares -->
       <div class="recent-news bg-white p-4 rounded-2 mb-4 shadow-sm">
         <h5 class="mb-3 border-bottom pb-2">Mais Lidas</h5>
         <ul class="list-unstyled">
@@ -110,12 +99,14 @@
                     <img src="<%= news.image %>" 
                          alt="Thumbnail" 
                          class="img-thumbnail rounded-circle" 
-                         style="width: 50px; height: 50px; object-fit: cover;">
+                         style="width: 50px; height: 50px; object-fit: cover;"
+                    >
                   <% } else { %>
                     <img src="/uploads/images/defaultNews.jpg"
                          alt="Default Thumbnail" 
                          class="img-thumbnail rounded-circle" 
-                         style="width: 50px; height: 50px; object-fit: cover;">
+                         style="width: 50px; height: 50px; object-fit: cover;"
+                    >
                   <% } %>
                 </div>
                 <div class="news-content">
@@ -150,7 +141,6 @@
         </div>
       </div>
 
-      <!-- Newsletter -->
       <div class="newsletter bg-white p-4 rounded-3 mb-4 shadow-sm">
         <h5 class="mb-3">Receba Atualizações</h5>
         <form>
@@ -164,7 +154,7 @@
   </div>
 </section>
 
-<section class="news-internacional py-5">
+<section id="newsInternacional" class="news-internacional py-5">
   <div class="news-content">
     <h2 class="text-center mb-4">Panorama Internacional</h2>
     <div class="row" id="news-container">
@@ -213,7 +203,7 @@
  /*== disable api for mediastack ==*/
  //const API_KEY = '';
  //const API_URL = `http://api.mediastack.com/v1/news?access_key=${API_KEY}&countries=br,gb&languages=pt&limit=6`;
- //const newsContainer = document.getElementById('news-container');
+ const newsContainer = document.getElementById('news-container');
 
  async function fetchInternationalNews() {
    try {
@@ -226,7 +216,7 @@
        newsContainer.innerHTML = '<p class="text-center text-muted">Nenhuma notícia disponível.</p>';
      }
    } catch (error) {
-     newsContainer.innerHTML = '<p class="text-center text-danger">Erro ao carregar. Tente novamente mais tarde.</p>';
+     newsContainer.innerHTML = '<p class="text-center text-danger">Erro ao carregar as notícias. Tente novamente mais tarde.</p>';
      console.error('Erro ao buscar notícias:', error);
    }
  }

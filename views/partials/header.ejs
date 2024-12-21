@@ -10,17 +10,12 @@
     <meta property="og:type" content="website">
     <title><%= title %> - Aurora Portal de Notícias</title>
     <link href="/images/icons/aurora-logo-hg.ico?v=2" rel="icon" type="image/x-icon" sizes="32x32" />
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Bootstrap CSS via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- DataTables CSS via CDN -->
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link href="/css/styles.css" rel="stylesheet">
 </head>
 <body>
@@ -34,28 +29,46 @@
                      height="32"
                 />
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Alternar navegação"
+            >
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <% if (user) { %>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                            <a class="nav-link" href="/admin">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn float-end gradient-button d-flex align-items-center" href="/admin/logout"><i class="fas fa-sign-out-alt me-2"></i>Sair</a>
+                            <a class="btn float-end gradient-button d-flex align-items-center" href="/admin/logout">
+                                <i class="fas fa-sign-out-alt me-2"></i>Sair
+                            </a>
                         </li>
                     <% } else { %>
-                        <!-- Link Contato com Dropdown -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Início</a>
+                        </li>                      
+                        <li class="nav-item">
+                            <a class="nav-link" href="#newsInternacional">Panorama Internacional</a>
+                        </li>                    
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle custom-toggle" href="#" id="contactoDropdown" role="button" aria-expanded="false">
-                                Contato<i class="fas fa-chevron-down ms-2"></i>
+                            <a class="nav-link dropdown-toggle custom-toggle" href="#"
+                               id="contactoDropdown"
+                               role="button"
+                               aria-expanded="false"
+                            >
+                                Conecte-se Conosco<i class="fas fa-chevron-down ms-2"></i>
                             </a>
                             <div class="dropdown-menu dropdown-mega dropdown-menu-end" aria-labelledby="contactoDropdown">
-                                <div class="row">
-                                    <!-- Redes Sociais -->
+                                <div class="row">                      
                                     <div class="col-md-6">
                                         <h6 class="dropdown-header">Nossas Redes</h6>
                                         <a class="dropdown-item" href="#">
@@ -71,25 +84,28 @@
                                             <i class="fab fa-linkedin-in me-2"></i>LinkedIn
                                         </a>
                                     </div>
-                                    <!-- Outras Opções -->
                                     <div class="col-md-6">
                                         <h6 class="dropdown-header">Outras Opções</h6>
                                         <a class="dropdown-item mb-3" href="#">
-                                            <i class="fas fa-envelope me-2"></i>auroranews.com.mz                                           
+                                            <i class="fas fa-envelope me-2"></i>
+                                            auroranews.com.mz
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </li>                    
                     
-                        <!-- Link Sobre com Dropdown -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle custom-toggle" href="#" id="sobreDropdown" role="button" aria-expanded="false">
-                                Sobre nós<i class="fas fa-chevron-down ms-2"></i>
+                        <li class="nav-item dropdown me-3">
+                            <a class="nav-link dropdown-toggle custom-toggle" href="#"
+                               id="sobreDropdown"
+                               role="button"
+                               aria-expanded="false">
+                                Saiba Mais<i class="fas fa-chevron-down ms-2"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-mega dropdown-menu-end mb-2" aria-labelledby="sobreDropdown">
+                            <div class="dropdown-menu dropdown-mega dropdown-menu-end mb-2"
+                                 aria-labelledby="sobreDropdown"
+                            >
                                 <div class="row">
-                                    <!-- Coluna Links -->
                                     <div class="col-md-6 mb-2">
                                         <a class="dropdown-item sobre-link" href="#" data-info="sobre-nos">
                                             <i class="fas fa-user-circle me-2"></i>Quem somos
@@ -101,7 +117,6 @@
                                             <i class="fas fa-file-contract me-2"></i>Termos de Serviço
                                         </a>
                                     </div>
-                                    <!-- Coluna de Informações -->
                                     <div class="col-md-6 px-5" id="sobreInfo">
                                         <p class="text-muted small">Passe o mouse nos links ao lado para ver informações aqui.</p>
                                     </div>
@@ -109,7 +124,9 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="btn float-end gradient-button d-flex align-items-center" href="/admin/login">
+                            <a class="btn float-end gradient-button d-flex align-items-center"
+                               href="/admin/login"
+                            >
                                 <i class="fas fa-sign-in-alt me-2"></i>Entrar
                             </a>
                         </li>
@@ -119,7 +136,7 @@
         </div>
     </nav>
 
-    <script>
+    <script type="text/javascript">
      document.addEventListener("DOMContentLoaded", function () {
          const sobreLinks = document.querySelectorAll(".sobre-link");
          const infoBox = document.getElementById("sobreInfo");
