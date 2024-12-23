@@ -60,7 +60,7 @@ function getAvatarColor(username) {
     return colors[index];
 }
 
-// Exibir detalhes de uma notícia específica com comentários
+// Exibi detalhes de uma notícia específica com comentários
 exports.getNewsDetail = async (req, res) => {
     try {
         const newsItem = await News.findById(req.params.id);
@@ -84,13 +84,13 @@ exports.getNewsDetail = async (req, res) => {
             image: categoryImages[category] || "/uploads/images/news.category/news-category.png", // Imagem padrão
         }));
         
-        // Adicionar cor dinâmica aos comentários
+        // Adiciona cor dinâmica aos comentários
         const commentsWithColors = comments.map(comment => ({
             ...comment.toObject(),
             avatarColor: getAvatarColor(comment.username),
         }));
         
-        // Buscar as 5 notícias mais recentes, excluindo a notícia atual
+        // Busca as 3 notícias mais recentes, excluindo a notícia atual
         const recentNews = await News.find({ _id: { $ne: req.params.id } })
             .sort({ createdAt: -1 })
             .limit(3);
@@ -99,7 +99,9 @@ exports.getNewsDetail = async (req, res) => {
             news: newsItem, 
             comments: commentsWithColors, 
             categories,
-            recentNews
+            recentNews,
+            likes: newsItem.likes, 
+            dislikes: newsItem.dislikes         
         });
     } catch (err) {
         console.error(err);
@@ -120,3 +122,74 @@ exports.addComment = async (req, res) => {
     }
 };
 
+exports.likeNews = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userIp = req.ip; // Obtendo o IP do usuário para identificação única
+
+        // Encontra a notícia e verificar se o usuário já interagiu
+        const news = await News.findById(id);
+        if (!news) {
+            return res.status(404).json({ error: 'Notícia não encontrada' });
+        }
+
+        const hasLiked = news.likedBy.includes(userIp);
+        const hasDisliked = news.dislikedBy.includes(userIp);
+
+        if (hasLiked) {
+            return res.status(400).json({ error: 'Você já curtiu esta notícia' });
+        }
+
+        if (hasDisliked) {
+            // Se já deu dislike, remove o dislike e adiciona o like
+            news.dislikes -= 1;
+            news.dislikedBy = news.dislikedBy.filter(ip => ip !== userIp);
+        }
+
+        // Incrementa likes e registra o IP
+        news.likes += 1;
+        news.likedBy.push(userIp);
+        await news.save();
+
+        res.status(200).json({ likes: news.likes, dislikes: news.dislikes });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Erro ao registrar like' });
+    }
+};
+
+exports.dislikeNews = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userIp = req.ip; // Obtendo o IP do usuário para identificação única
+
+        // Encontra a notícia e verificar se o usuário já interagiu
+        const news = await News.findById(id);
+        if (!news) {
+            return res.status(404).json({ error: 'Notícia não encontrada' });
+        }
+
+        const hasLiked = news.likedBy.includes(userIp);
+        const hasDisliked = news.dislikedBy.includes(userIp);
+
+        if (hasDisliked) {
+            return res.status(400).json({ error: 'Você já deu dislike nesta notícia' });
+        }
+
+        if (hasLiked) {
+            // Se já deu like, remove o like e adiciona o dislike
+            news.likes -= 1;
+            news.likedBy = news.likedBy.filter(ip => ip !== userIp);
+        }
+
+        // Incrementa dislikes e registra o IP
+        news.dislikes += 1;
+        news.dislikedBy.push(userIp);
+        await news.save();
+
+        res.status(200).json({ likes: news.likes, dislikes: news.dislikes });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Erro ao registrar dislike' });
+    }
+};

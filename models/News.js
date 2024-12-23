@@ -6,6 +6,10 @@ const newsSchema = new mongoose.Schema({
     author: { type: String, required: true },
     category: { type: String, required: true }, // Nova categoria
     image: { type: String }, // URL da imagem
+    likes: { type: Number, default: 0 },
+    dislikes: { type: Number, default: 0 },
+    likedBy: { type: [String], default: [] }, // Armazena IPs de usuários que deram like
+    dislikedBy: { type: [String], default: [] }, // Armazena IPs de usuários que deram dislike   
     createdAt: {
         type: Date,
         default: Date.now

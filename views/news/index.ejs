@@ -57,7 +57,7 @@
       <div class="row">
         <% news.forEach(item => { %>
           <div class="col-md-6 mb-4">
-            <div class="card card-press-down shadow-sm h-100">
+            <div class="card card-hover card-press-down shadow-sm h-100">
               <% if (item.image) { %>
                 <img src="<%= item.image %>" class="img-fluid" alt="Imagem da Notícia">
               <% } else { %>
@@ -72,6 +72,13 @@
               </div>
               <div class="card-footer text-muted" style="font-size: 0.85rem;">
                 Por <%= item.author %> em <%= new Date(item.createdAt).toLocaleDateString() %>
+              </div>
+              <div class="curtain">
+                <div class="left-items">
+                  <p class="likes"><i class="fas fa-thumbs-up me-1"></i><%= item.likes %></p>
+                  <p class="dislikes"><i class="fas fa-thumbs-down me-1"></i><%= item.dislikes %></p>
+                </div>
+                <p class="category"><i class="fas fa-tag me-1"></i><%= item.category %></p>
               </div>
             </div>
           </div>

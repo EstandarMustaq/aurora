@@ -26,7 +26,30 @@
                 </div>
             </article>
 
-            <hr class="custom-hr">
+            <div class="d-flex align-items-center justify-content-between my-4">
+                <div class="like-dislike">
+                    <button class="btn btn-like me-2" id="likeButton">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span id="likeCount"><%= likes %></span>
+                    </button>
+                    <button class="btn btn-dislike" id="dislikeButton">
+                        <i class="fas fa-thumbs-down"></i>
+                        <span id="dislikeCount"><%= dislikes %></span>
+                    </button>
+                </div>
+                <div class="share-section">
+                    <button class="btn btn-share" id="facebookShare">
+                        <i class="fab fa-facebook"></i>
+                    </button>
+                    <button class="btn btn-share" id="twitterShare">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button class="btn btn-share" id="whatsappShare">
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
+                </div>
+            </div>
+
             <h4 class="section-title section-title-green mb-4">Comentários</h4>
             <% if (comments.length === 0) { %>
                 <p style="font-size: 0.85rem;">
@@ -157,3 +180,72 @@
 
 <%- include('../partials/footer') %>
 
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+     const newsId = '<%= news._id %>';
+     const currentUrl = window.location.href;
+
+     const likeButton = document.getElementById('likeButton');
+     const dislikeButton = document.getElementById('dislikeButton');
+     const likeCount = document.getElementById('likeCount');
+     const dislikeCount = document.getElementById('dislikeCount');
+
+     const updateState = async (url, isLike) => {
+         try {
+             const response = await fetch(url, { method: 'POST' });
+             if (response.ok) {
+                 const data = await response.json();
+
+                 // Atualizar contadores no frontend
+                 likeCount.textContent = data.likes;
+                 dislikeCount.textContent = data.dislikes;
+
+                 // Atualizar classes ativas
+                 if (isLike) {
+                     likeButton.classList.add('active');
+                     dislikeButton.classList.remove('active');
+                 } else {
+                     dislikeButton.classList.add('active');
+                     likeButton.classList.remove('active');
+                 }
+             } else {
+                 const errorData = await response.json();
+                 console.error(errorData.error);
+             }
+         } catch (error) {
+             console.error('Erro ao registrar interação:', error);
+         }
+     };
+
+     likeButton.addEventListener('click', () => {
+         updateState(`/news/${newsId}/like`, true);
+     });
+
+     dislikeButton.addEventListener('click', () => {
+         updateState(`/news/${newsId}/dislike`, false);
+     });
+
+     // Share Buttons
+     const facebookShare = document.getElementById('facebookShare');
+     const twitterShare = document.getElementById('twitterShare');
+     const whatsappShare = document.getElementById('whatsappShare');
+
+     // Compartilhamento no Facebook
+     facebookShare.addEventListener('click', () => {
+         const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+         window.open(fbShareUrl, '_blank');
+     });
+
+     // Compartilhamento no Twitter
+     twitterShare.addEventListener('click', () => {
+         const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}`;
+         window.open(twitterShareUrl, '_blank');
+     });
+
+     // Compartilhamento no WhatsApp
+     whatsappShare.addEventListener('click', () => {
+         const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(currentUrl)}`;
+         window.open(whatsappShareUrl, '_blank');
+     });
+ });
+</script>
