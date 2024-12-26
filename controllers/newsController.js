@@ -37,9 +37,7 @@ exports.getAllNews = async (req, res) => {
             popularNews,
             selectedCategory: category || 'All',
             currentPage: parseInt(page),
-            hasMore,
-            likes: newsItem.likes,
-            dislikes: newsItem.dislikes
+            hasMore
         });
     } catch (err) {
         console.error(err);
