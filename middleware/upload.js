@@ -1,33 +1,27 @@
 const multer = require('multer');
-const path = require('path');
+const { v2: cloudinary } = require('cloudinary');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
-// Configuração do armazenamento
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/uploads/images/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname)); // Ex: 1234567890.jpg
-    }
+// Configuração do Cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// Filtrar tipos de arquivos
-const fileFilter = (req, file, cb) => {
-    const allowedTypes = /jpeg|jpg|png|gif/;
-    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = allowedTypes.test(file.mimetype);
-    if (mimetype && extname) {
-        return cb(null, true);
-    } else {
-        cb('Erro: Apenas imagens são permitidas!');
-    }
-};
+// Configuração do armazenamento no Cloudinary
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'uploads/images', // Pasta onde as imagens serão salvas no Cloudinary
+        allowed_formats: ['jpeg', 'jpg', 'png', 'gif'], // Tipos de arquivos permitidos
+    },
+});
 
+// Configuração do Multer
 const upload = multer({
     storage: storage,
     limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
-    fileFilter: fileFilter
 });
 
 module.exports = upload;
-
