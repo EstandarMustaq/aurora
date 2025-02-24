@@ -2,7 +2,7 @@ const News = require('../models/News');
 const User = require('../models/User');
 const { validationResult } = require('express-validator');
 
-// Exibir painel administrativo com estatísticas
+// Exibir painel administrativo
 exports.adminDashboard = async (req, res) => {
     try {
         const newsCount = await News.countDocuments();
@@ -17,44 +17,31 @@ exports.adminDashboard = async (req, res) => {
     }
 };
 
-// Listar todas as notícias para o DataTable com Paginação e Busca
+// Listar todas as notícias
 exports.listNews = async (req, res) => {
     try {
-        const { start, length, draw, search, order, columns } = req.query;
+        const { start, length, draw, search } = req.query;
         const searchValue = search.value;
-
-        let query = {};
-        if (searchValue) {
-            query = {
-                $or: [
-                    { title: { $regex: searchValue, $options: 'i' } },
-                    { author: { $regex: searchValue, $options: 'i' } },
-                    { category: { $regex: searchValue, $options: 'i' } }
-                ]
-            };
-        }
+        let query = searchValue ? {
+            $or: [
+                { title: { $regex: searchValue, $options: 'i' } },
+                { author: { $regex: searchValue, $options: 'i' } },
+                { category: { $regex: searchValue, $options: 'i' } }
+            ]
+        } : {};
 
         const totalRecords = await News.countDocuments();
         const filteredRecords = await News.countDocuments(query);
+        const news = await News.find(query).sort({ createdAt: -1 }).skip(parseInt(start)).limit(parseInt(length));
 
-        const news = await News.find(query)
-            .sort({ createdAt: -1 })
-            .skip(parseInt(start))
-            .limit(parseInt(length));
-
-        res.json({
-            draw: parseInt(draw),
-            recordsTotal: totalRecords,
-            recordsFiltered: filteredRecords,
-            data: news
-        });
+        res.json({ draw: parseInt(draw), recordsTotal: totalRecords, recordsFiltered: filteredRecords, data: news });
     } catch (err) {
         console.error(err);
         res.status(500).send('Erro ao listar notícias');
     }
 };
 
-// Criar uma nova notícia com validação e upload de imagem
+// Criar notícia com Cloudinary
 exports.createNews = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -63,7 +50,7 @@ exports.createNews = async (req, res) => {
 
     try {
         const { title, content, author, category } = req.body;
-        const image = req.file ? `/uploads/images/${req.file.filename}` : null;
+        const image = req.file ? req.file.path : null;
         await News.create({ title, content, author, category, image });
         res.redirect('/admin');
     } catch (err) {
@@ -72,13 +59,11 @@ exports.createNews = async (req, res) => {
     }
 };
 
-// Exibir formulário de edição de notícia
+// Exibir formulário de edição
 exports.editNewsForm = async (req, res) => {
     try {
         const newsItem = await News.findById(req.params.id);
-        if (!newsItem) {
-            return res.status(404).send('Notícia não encontrada');
-        }
+        if (!newsItem) return res.status(404).send('Notícia não encontrada');
         res.render('admin/edit', { news: newsItem, user: req.user });
     } catch (err) {
         console.error(err);
@@ -86,7 +71,7 @@ exports.editNewsForm = async (req, res) => {
     }
 };
 
-// Atualizar uma notícia com validação e upload de imagem
+// Atualizar notícia
 exports.updateNews = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -96,7 +81,7 @@ exports.updateNews = async (req, res) => {
 
     try {
         const { title, content, author, category } = req.body;
-        const image = req.file ? `/uploads/images/${req.file.filename}` : req.body.currentImage;
+        const image = req.file ? req.file.path : req.body.currentImage;
         await News.findByIdAndUpdate(req.params.id, { title, content, author, category, image });
         res.redirect('/admin');
     } catch (err) {
@@ -105,7 +90,7 @@ exports.updateNews = async (req, res) => {
     }
 };
 
-// Deletar uma notícia
+// Deletar notícia
 exports.deleteNews = async (req, res) => {
     try {
         await News.findByIdAndDelete(req.params.id);
@@ -115,4 +100,3 @@ exports.deleteNews = async (req, res) => {
         res.status(500).send('Erro ao deletar notícia');
     }
 };
-

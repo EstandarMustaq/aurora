@@ -18,7 +18,7 @@ router.get('/logout', authController.logout);
 // Rotas protegidas
 router.get('/', protect, adminController.adminDashboard);
 
-// CRUD de notícias
+// Criar notícia com Cloudinary
 router.get('/news/new', protect, authorize('admin'), (req, res) => {
     res.render('admin/news', { user: req.user, errors: [] });
 });
@@ -41,4 +41,3 @@ router.put('/edit/:id', protect, authorize('admin'), upload.single('image'), [
 router.delete('/news/:id', protect, authorize('admin'), adminController.deleteNews);
 
 module.exports = router;
-
