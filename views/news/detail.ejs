@@ -27,16 +27,6 @@
             </article>
 
             <div class="d-flex align-items-center justify-content-between my-4">
-                <div class="like-dislike">
-                    <button class="btn btn-like me-2" id="likeButton">
-                        <i class="fas fa-thumbs-up"></i>
-                        <span id="likeCount"><%= likes %></span>
-                    </button>
-                    <button class="btn btn-dislike" id="dislikeButton">
-                        <i class="fas fa-thumbs-down"></i>
-                        <span id="dislikeCount"><%= dislikes %></span>
-                    </button>
-                </div>
                 <div class="share-section">
                     <button class="btn btn-share" id="facebookShare">
                         <i class="fab fa-facebook"></i>
@@ -182,49 +172,6 @@
 
 <script>
  document.addEventListener('DOMContentLoaded', () => {
-     const newsId = '<%= news._id %>';
-     const currentUrl = window.location.href;
-
-     const likeButton = document.getElementById('likeButton');
-     const dislikeButton = document.getElementById('dislikeButton');
-     const likeCount = document.getElementById('likeCount');
-     const dislikeCount = document.getElementById('dislikeCount');
-
-     const updateState = async (url, isLike) => {
-         try {
-             const response = await fetch(url, { method: 'POST' });
-             if (response.ok) {
-                 const data = await response.json();
-
-                 // Atualizar contadores no frontend
-                 likeCount.textContent = data.likes;
-                 dislikeCount.textContent = data.dislikes;
-
-                 // Atualizar classes ativas
-                 if (isLike) {
-                     likeButton.classList.add('active');
-                     dislikeButton.classList.remove('active');
-                 } else {
-                     dislikeButton.classList.add('active');
-                     likeButton.classList.remove('active');
-                 }
-             } else {
-                 const errorData = await response.json();
-                 console.error(errorData.error);
-             }
-         } catch (error) {
-             console.error('Erro ao registrar interação:', error);
-         }
-     };
-
-     likeButton.addEventListener('click', () => {
-         updateState(`/news/${newsId}/like`, true);
-     });
-
-     dislikeButton.addEventListener('click', () => {
-         updateState(`/news/${newsId}/dislike`, false);
-     });
-
      // Share Buttons
      const facebookShare = document.getElementById('facebookShare');
      const twitterShare = document.getElementById('twitterShare');
