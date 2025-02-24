@@ -31,6 +31,7 @@ app.use(
         "default-src": ["'self'"],
         "script-src": [
           "'self'",
+          "'unsafe-inline'",
           "https://cdn.jsdelivr.net",
           "https://code.jquery.com",
           "https://cdn.datatables.net",
