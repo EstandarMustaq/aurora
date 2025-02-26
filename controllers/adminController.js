@@ -56,20 +56,22 @@ exports.listNews = async (req, res) => {
 
 // Criar uma nova notícia com validação e upload de imagem
 exports.createNews = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.render('admin/news', { errors: errors.array(), user: req.user });
-    }
+  const errors = validationResult(req); 
+  if (!errors.isEmpty()) {
+    return res.render('admin/news', {
+      errors: errors.array(), user: req.usersCount});
+  }
 
-    try {
-        const { title, content, author, category } = req.body;
-        const image = image = req.file ? req.file.path : null; // URL da imagem no Cloudinary 
-        await News.create({ title, content, author, category, image });
-        res.redirect('/admin');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Erro ao criar notícia');
-    }
+  try {
+    const { title, content, author, category } = req.body; 
+    const image = req.file ? req.file.path : null; 
+    await News.create({ title, content, author, category, image });
+    res.redirect('/admin');
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).send('Erro ao criar notícia');
+  } 
 };
 
 // Exibir formulário de edição de notícia
@@ -86,23 +88,24 @@ exports.editNewsForm = async (req, res) => {
     }
 };
 
-// Atualizar uma notícia com validação e upload de imagem
-exports.updateNews = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const newsItem = await News.findById(req.params.id);
-        return res.render('admin/edit', { errors: errors.array(), news: newsItem, user: req.user });
-    }
+// Atualizar notícia
+exports.updateNews = async (req, res) => { 
+  const errors = validationResult(req); 
+  if (!errors.isEmpty()) { 
+    const newsItem = await News.findById(req.params.id); 
+    return res.render('admin/edit', { errors: errors.array(), news: newsItem, user: req.user });
+  } 
 
-    try {
-        const { title, content, author, category } = req.body;
-        const image = req.file ? req.file.path : req.body.currentImage; // Atualiza imagem se nova for enviada
-        await News.findByIdAndUpdate(req.params.id, { title, content, author, category, image });
-        res.redirect('/admin');
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Erro ao atualizar notícia');
-    }
+  try { 
+    const { title, content, author, category } = req.body; 
+    const image = req.file ? req.file.path : req.body.currentImage; 
+    await News.findByIdAndUpdate(req.params.id, { title, content, author, category, image }); 
+    res.redirect('/admin'); 
+  } 
+  catch (err) { 
+    console.error(err); 
+    res.status(500).send('Erro ao atualizar notícia'); 
+  } 
 };
 
 // Deletar uma notícia
