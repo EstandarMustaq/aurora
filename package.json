@@ -1,6 +1,6 @@
 {
   "name": "auroranews",
-  "version": "2.1.0",
+  "version": "2.7.0",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
