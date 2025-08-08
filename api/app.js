@@ -54,6 +54,7 @@ app.use(
           "'self'",        
           "data:",
           "https://cdn.jsdelivr.net",
+          "https://res.cloudinary.com",
         ],
         "connect-src": ["'self'", "https://fonts.googleapis.com"],
         "frame-src": ["'none'"],
