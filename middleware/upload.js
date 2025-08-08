@@ -13,7 +13,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: 'uploads/images', // Pasta onde as imagens serão salvas no Cloudinary
+        folder: 'uploads', // Pasta onde as imagens serão salvas no Cloudinary
         allowed_formats: ['jpeg', 'jpg', 'png', 'gif'], // Tipos de arquivos permitidos
     },
 });
